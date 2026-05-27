@@ -261,3 +261,97 @@ export const useFaqStore = defineStore('faqs', {
     },
   },
 });
+
+// =========================================================================
+// Page sections — flexible per-page content blocks (about / contact / faq).
+// Each row: { page, kind, eyebrow, title, body, data, sort_order, visible }.
+// Anon sees only visible rows (RLS); admin sees everything.
+// =========================================================================
+export const usePageSectionsStore = defineStore('pageSections', {
+  state: () => ({
+    sections: [],
+    loading: false,
+    loaded: false,
+    error: null,
+  }),
+
+  getters: {
+    byPage: (state) => (page) =>
+      state.sections
+        .filter((s) => s.page === page)
+        .sort((a, b) => (a.sort_order ?? 9999) - (b.sort_order ?? 9999)),
+
+    visibleByPage: (state) => (page) =>
+      state.sections
+        .filter((s) => s.page === page && s.visible !== false)
+        .sort((a, b) => (a.sort_order ?? 9999) - (b.sort_order ?? 9999)),
+  },
+
+  actions: {
+    async fetchAll(force = false) {
+      if (this.loaded && !force) return;
+      this.loading = true;
+      this.error = null;
+      try {
+        const { data, error } = await supabase
+          .from('page_sections')
+          .select('*')
+          .order('sort_order', { ascending: true });
+        if (error) throw error;
+        this.sections = data ?? [];
+        this.loaded = true;
+      } catch (e) {
+        this.error = e.message ?? String(e);
+        console.error('[page_sections] fetchAll', e);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async addSection({ page, kind, eyebrow = null, title = null, body = null, data = {}, sort_order = 9999, visible = true }) {
+      const payload = { page, kind, eyebrow, title, body, data, sort_order, visible };
+      const { data: row, error } = await supabase
+        .from('page_sections')
+        .insert(payload)
+        .select()
+        .single();
+      if (error) throw error;
+      this.sections.push(row);
+      return row;
+    },
+
+    async updateSection(id, patch) {
+      const { data, error } = await supabase
+        .from('page_sections')
+        .update(patch)
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      const idx = this.sections.findIndex((s) => s.id === id);
+      if (idx >= 0) this.sections[idx] = data;
+      return data;
+    },
+
+    async deleteSection(id) {
+      const { error } = await supabase.from('page_sections').delete().eq('id', id);
+      if (error) throw error;
+      this.sections = this.sections.filter((s) => s.id !== id);
+    },
+
+    async reorderPage(page, orderedIds) {
+      // Persist new sort_order values (10, 20, 30, ...) for the given page.
+      // Mutates store rows first for snappy UI, then writes in parallel.
+      const next = orderedIds.map((id, idx) => ({ id, sort_order: (idx + 1) * 10 }));
+      next.forEach(({ id, sort_order }) => {
+        const row = this.sections.find((s) => s.id === id);
+        if (row) row.sort_order = sort_order;
+      });
+      await Promise.all(
+        next.map(({ id, sort_order }) =>
+          supabase.from('page_sections').update({ sort_order }).eq('id', id)
+        )
+      );
+    },
+  },
+});
