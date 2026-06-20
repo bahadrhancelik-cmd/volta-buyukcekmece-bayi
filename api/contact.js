@@ -6,8 +6,8 @@
 // Optional env:
 //   CONTACT_FROM_EMAIL — verified Resend sender, e.g. "Volta Bayi <bayi@alanadiniz.com>"
 //   CONTACT_TO_EMAIL   — recipient (defaults to the dealer Gmail below)
-//   SUPABASE_URL       — same value as VITE_SUPABASE_URL; enables the audit log
-//   SUPABASE_ANON_KEY  — same value as VITE_SUPABASE_ANON_KEY
+//   SUPABASE_URL       — enables the audit log; falls back to VITE_SUPABASE_URL
+//   SUPABASE_ANON_KEY  — falls back to VITE_SUPABASE_ANON_KEY
 
 const DEFAULT_FROM = 'Volta Bayi <onboarding@resend.dev>';
 const DEFAULT_TO = 'cdhmotorluaraclar@gmail.com';
@@ -51,8 +51,11 @@ export default async function handler(req, res) {
   const to = process.env.CONTACT_TO_EMAIL || DEFAULT_TO;
 
   // Best-effort audit log — only when Supabase env is present. Never blocks the email.
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_ANON_KEY;
+  // Fall back to the VITE_-prefixed names: in Vercel every project env var is
+  // exposed to the function at runtime regardless of prefix, so the frontend's
+  // build-time Supabase vars work here too without duplicating them.
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
   if (supabaseUrl && supabaseKey) {
     try {
       const r = await fetch(`${supabaseUrl}/rest/v1/contact_messages`, {
@@ -71,6 +74,8 @@ export default async function handler(req, res) {
     } catch (e) {
       console.error('[contact] audit insert exception', e);
     }
+  } else {
+    console.error('[contact] audit insert skipped — Supabase env not configured');
   }
 
   const subject = `Yeni iletişim formu mesajı — ${name}`;
