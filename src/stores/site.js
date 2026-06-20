@@ -261,3 +261,65 @@ export const useFaqStore = defineStore('faqs', {
     },
   },
 });
+
+// =========================================================================
+// Contact messages — audit log of /iletisim form submissions. Anon can
+// insert (via api/contact); only authenticated admins can read/manage.
+// =========================================================================
+export const useContactMessagesStore = defineStore('contactMessages', {
+  state: () => ({
+    messages: [],
+    loading: false,
+    loaded: false,
+    error: null,
+  }),
+
+  getters: {
+    sorted: (state) =>
+      [...state.messages].sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      ),
+    unreadCount: (state) => state.messages.filter((m) => !m.read).length,
+  },
+
+  actions: {
+    async fetchAll(force = false) {
+      if (this.loaded && !force) return;
+      this.loading = true;
+      this.error = null;
+      try {
+        const { data, error } = await supabase
+          .from('contact_messages')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        this.messages = data ?? [];
+        this.loaded = true;
+      } catch (e) {
+        this.error = e.message ?? String(e);
+        console.error('[contactMessages] fetchAll', e);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async setRead(id, read) {
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .update({ read })
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      const idx = this.messages.findIndex((m) => m.id === id);
+      if (idx >= 0) this.messages[idx] = data;
+      return data;
+    },
+
+    async remove(id) {
+      const { error } = await supabase.from('contact_messages').delete().eq('id', id);
+      if (error) throw error;
+      this.messages = this.messages.filter((m) => m.id !== id);
+    },
+  },
+});

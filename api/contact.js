@@ -1,0 +1,108 @@
+// Vercel serverless function — receives the public contact form, stores a
+// best-effort audit row in Supabase, and emails the dealer via Resend.
+//
+// Required env (Vercel project settings):
+//   RESEND_API_KEY     — Resend API key (https://resend.com)
+// Optional env:
+//   CONTACT_FROM_EMAIL — verified Resend sender, e.g. "Volta Bayi <bayi@alanadiniz.com>"
+//   CONTACT_TO_EMAIL   — recipient (defaults to the dealer Gmail below)
+//   SUPABASE_URL       — same value as VITE_SUPABASE_URL; enables the audit log
+//   SUPABASE_ANON_KEY  — same value as VITE_SUPABASE_ANON_KEY
+
+const DEFAULT_FROM = 'Volta Bayi <onboarding@resend.dev>';
+const DEFAULT_TO = 'cdhmotorluaraclar@gmail.com';
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"]/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]
+  ));
+}
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Yöntem desteklenmiyor.' });
+  }
+
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
+
+  const name = String(body.name ?? '').trim();
+  const phone = String(body.phone ?? '').trim();
+  const message = String(body.message ?? '').trim();
+
+  if (!name || !phone || !message) {
+    return res.status(400).json({ error: 'Ad, telefon ve mesaj alanları zorunludur.' });
+  }
+  if (name.length > 200 || phone.length > 50 || message.length > 5000) {
+    return res.status(400).json({ error: 'Girdiğiniz bilgiler çok uzun.' });
+  }
+
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  if (!RESEND_API_KEY) {
+    console.error('[contact] RESEND_API_KEY is not configured');
+    return res.status(500).json({ error: 'Sunucu yapılandırması eksik. Lütfen telefonla ulaşın.' });
+  }
+
+  const from = process.env.CONTACT_FROM_EMAIL || DEFAULT_FROM;
+  const to = process.env.CONTACT_TO_EMAIL || DEFAULT_TO;
+
+  // Best-effort audit log — only when Supabase env is present. Never blocks the email.
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY;
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const r = await fetch(`${supabaseUrl}/rest/v1/contact_messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({ name, phone, message }),
+      });
+      if (!r.ok) {
+        console.error('[contact] audit insert failed', r.status, await r.text());
+      }
+    } catch (e) {
+      console.error('[contact] audit insert exception', e);
+    }
+  }
+
+  const subject = `Yeni iletişim formu mesajı — ${name}`;
+  const html =
+    `<h2 style="margin:0 0 16px">Yeni iletişim formu mesajı</h2>` +
+    `<p><strong>Ad Soyad:</strong> ${escapeHtml(name)}</p>` +
+    `<p><strong>Telefon:</strong> ${escapeHtml(phone)}</p>` +
+    `<p><strong>Mesaj:</strong></p>` +
+    `<p style="white-space:pre-wrap">${escapeHtml(message)}</p>`;
+  const text =
+    `Yeni iletişim formu mesajı\n\n` +
+    `Ad Soyad: ${name}\n` +
+    `Telefon: ${phone}\n\n` +
+    `Mesaj:\n${message}`;
+
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({ from, to: [to], subject, html, text }),
+    });
+    if (!r.ok) {
+      console.error('[contact] resend error', r.status, await r.text());
+      return res.status(502).json({ error: 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.' });
+    }
+  } catch (e) {
+    console.error('[contact] resend exception', e);
+    return res.status(502).json({ error: 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.' });
+  }
+
+  return res.status(200).json({ ok: true });
+}

@@ -28,6 +28,9 @@
         <RouterLink to="/admin/sss" active-class="active" class="admin-nav-link">
           <span class="admin-nav-icon">?</span> SSS
         </RouterLink>
+        <RouterLink to="/admin/mesajlar" active-class="active" class="admin-nav-link">
+          <span class="admin-nav-icon">✉</span> Mesajlar
+        </RouterLink>
         <RouterLink to="/admin/ayarlar" active-class="active" class="admin-nav-link">
           <span class="admin-nav-icon">⚙</span> Site ayarları
         </RouterLink>

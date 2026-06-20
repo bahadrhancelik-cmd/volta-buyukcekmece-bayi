@@ -69,10 +69,6 @@
             <RouterLink to="/iletisim" class="btn btn-primary btn-lg">Bayiden bilgi al</RouterLink>
             <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg">Hemen ara</a>
           </div>
-
-          <div class="detail-note">
-            ⚠ Bu site bilgi amaçlıdır, online satış yapılmamaktadır. Satış için lütfen bayimizi arayın veya ziyaret edin.
-          </div>
         </div>
       </div>
 

@@ -793,15 +793,6 @@ img { max-width: 100%; display: block; }
 .color-pick.active { border-color: var(--ink); }
 
 .detail-cta-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.detail-note {
-  padding: 14px 18px;
-  background: var(--surface-2);
-  border-left: 3px solid var(--primary);
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  color: var(--ink-3);
-  line-height: 1.5;
-}
 
 .related .section-title { margin-bottom: 24px; font-size: 28px; }
 

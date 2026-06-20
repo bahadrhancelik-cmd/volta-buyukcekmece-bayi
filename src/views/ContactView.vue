@@ -92,8 +92,11 @@
             <textarea rows="5" required v-model="form.message" placeholder="İlgilendiğiniz model, sorunuz..."></textarea>
           </label>
           <div class="form-bottom">
-            <button type="submit" class="btn btn-primary btn-lg">Gönder</button>
+            <button type="submit" class="btn btn-primary btn-lg" :disabled="sending">
+              {{ sending ? 'Gönderiliyor…' : 'Gönder' }}
+            </button>
             <span v-if="sent" class="form-sent">✓ Mesajınız alındı, en kısa sürede dönüş yapacağız.</span>
+            <span v-if="sendError" class="form-error">{{ sendError }}</span>
           </div>
         </form>
       </div>
@@ -140,12 +143,31 @@ function firstLine(s) {
 
 const form = reactive({ name: '', phone: '', message: '' });
 const sent = ref(false);
+const sending = ref(false);
+const sendError = ref('');
 
-function submit() {
-  sent.value = true;
-  setTimeout(() => { sent.value = false; }, 4000);
-  form.name = '';
-  form.phone = '';
-  form.message = '';
+async function submit() {
+  sendError.value = '';
+  sending.value = true;
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: form.name, phone: form.phone, message: form.message }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.');
+    }
+    sent.value = true;
+    form.name = '';
+    form.phone = '';
+    form.message = '';
+    setTimeout(() => { sent.value = false; }, 6000);
+  } catch (e) {
+    sendError.value = e.message || 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.';
+  } finally {
+    sending.value = false;
+  }
 }
 </script>
