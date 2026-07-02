@@ -17,13 +17,13 @@
           <div v-if="settings.phone" class="contact-item">
             <div class="contact-label">Telefon</div>
             <div class="contact-value">
-              <a v-if="phoneHref" :href="phoneHref">{{ settings.phone }}</a>
+              <a v-if="phoneHref" :href="phoneHref" @click="trackEvent('clickContactPhoneLink')">{{ settings.phone }}</a>
               <span v-else>{{ settings.phone }}</span>
             </div>
           </div>
           <div v-if="settings.email" class="contact-item">
             <div class="contact-label">E-posta</div>
-            <div class="contact-value"><a :href="`mailto:${settings.email}`">{{ settings.email }}</a></div>
+            <div class="contact-value"><a :href="`mailto:${settings.email}`" @click="trackEvent('clickContactEmailLink')">{{ settings.email }}</a></div>
           </div>
           <div v-if="settings.working_hours" class="contact-item">
             <div class="contact-label">Çalışma saatleri</div>
@@ -32,9 +32,9 @@
           <div v-if="hasSocial" class="contact-item">
             <div class="contact-label">Sosyal medya</div>
             <div class="contact-value" style="display: flex; gap: 12px; flex-wrap: wrap">
-              <a v-if="settings.social_instagram" :href="settings.social_instagram" target="_blank" rel="noopener">Instagram</a>
-              <a v-if="settings.social_facebook" :href="settings.social_facebook" target="_blank" rel="noopener">Facebook</a>
-              <a v-if="settings.social_youtube" :href="settings.social_youtube" target="_blank" rel="noopener">YouTube</a>
+              <a v-if="settings.social_instagram" :href="settings.social_instagram" target="_blank" rel="noopener" @click="trackEvent('clickContactInstagramLink')">Instagram</a>
+              <a v-if="settings.social_facebook" :href="settings.social_facebook" target="_blank" rel="noopener" @click="trackEvent('clickContactFacebookLink')">Facebook</a>
+              <a v-if="settings.social_youtube" :href="settings.social_youtube" target="_blank" rel="noopener" @click="trackEvent('clickContactYoutubeLink')">YouTube</a>
             </div>
           </div>
         </div>
@@ -85,13 +85,13 @@
           <div v-if="settings.phone" class="contact-item">
             <div class="contact-label">Telefon</div>
             <div class="contact-value">
-              <a v-if="phoneHref" :href="phoneHref">{{ settings.phone }}</a>
+              <a v-if="phoneHref" :href="phoneHref" @click="trackEvent('clickContactPhoneLink')">{{ settings.phone }}</a>
               <span v-else>{{ settings.phone }}</span>
             </div>
           </div>
           <div v-if="settings.email" class="contact-item">
             <div class="contact-label">E-posta</div>
-            <div class="contact-value"><a :href="`mailto:${settings.email}`">{{ settings.email }}</a></div>
+            <div class="contact-value"><a :href="`mailto:${settings.email}`" @click="trackEvent('clickContactEmailLink')">{{ settings.email }}</a></div>
           </div>
           <div v-if="settings.working_hours" class="contact-item">
             <div class="contact-label">Çalışma saatleri</div>
@@ -100,9 +100,9 @@
           <div v-if="hasSocial" class="contact-item">
             <div class="contact-label">Sosyal medya</div>
             <div class="contact-value" style="display: flex; gap: 12px; flex-wrap: wrap">
-              <a v-if="settings.social_instagram" :href="settings.social_instagram" target="_blank" rel="noopener">Instagram</a>
-              <a v-if="settings.social_facebook" :href="settings.social_facebook" target="_blank" rel="noopener">Facebook</a>
-              <a v-if="settings.social_youtube" :href="settings.social_youtube" target="_blank" rel="noopener">YouTube</a>
+              <a v-if="settings.social_instagram" :href="settings.social_instagram" target="_blank" rel="noopener" @click="trackEvent('clickContactInstagramLink')">Instagram</a>
+              <a v-if="settings.social_facebook" :href="settings.social_facebook" target="_blank" rel="noopener" @click="trackEvent('clickContactFacebookLink')">Facebook</a>
+              <a v-if="settings.social_youtube" :href="settings.social_youtube" target="_blank" rel="noopener" @click="trackEvent('clickContactYoutubeLink')">YouTube</a>
             </div>
           </div>
         </div>
@@ -190,6 +190,7 @@
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useSettingsStore, usePageSectionsStore } from '../stores/site';
 import SectionBlock from '../components/SectionBlock.vue';
+import { trackEvent } from '../lib/analytics';
 
 const settingsStore = useSettingsStore();
 const pageStore = usePageSectionsStore();
@@ -265,6 +266,7 @@ const sending = ref(false);
 const sendError = ref('');
 
 async function submit() {
+  trackEvent('submitContactForm');
   sendError.value = '';
   sending.value = true;
   try {
@@ -277,12 +279,14 @@ async function submit() {
     if (!res.ok || !data.ok) {
       throw new Error(data.error || 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.');
     }
+    trackEvent('submitContactFormSuccess');
     sent.value = true;
     form.name = '';
     form.phone = '';
     form.message = '';
     setTimeout(() => { sent.value = false; }, 6000);
   } catch (e) {
+    trackEvent('submitContactFormError');
     sendError.value = e.message || 'Mesaj gönderilemedi. Lütfen telefonla ulaşın.';
   } finally {
     sending.value = false;

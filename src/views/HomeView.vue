@@ -15,10 +15,10 @@
           <h1 class="hero-title">{{ heroTitle }}</h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
           <div class="hero-ctas">
-            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg">
+            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
             </RouterLink>
-            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg">Bayiyi ziyaret et →</RouterLink>
+            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Bayiyi ziyaret et →</RouterLink>
           </div>
         </div>
       </div>
@@ -34,10 +34,10 @@
           <h1 class="hero-title" v-html="heroTitleSplit"></h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
           <div class="hero-ctas">
-            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg">
+            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
             </RouterLink>
-            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg">Bayiyi ziyaret et →</RouterLink>
+            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Bayiyi ziyaret et →</RouterLink>
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
@@ -62,7 +62,7 @@
               :key="m.id"
               class="hero-stack-card"
               :class="`stack-${i}`"
-              @click="$router.push(`/motor/${m.slug}`)"
+              @click="openFeaturedCard(m)"
             >
               <MotoImage :motor="m" className="hero-stack-image" />
               <div class="hero-stack-meta">
@@ -83,6 +83,7 @@
         :key="c.id"
         :to="`/katalog?cat=${c.slug}`"
         class="cat-card"
+        @click="trackEvent('clickHomeCategoryCard')"
       >
         <div class="cat-num">{{ countByCategory(c.slug) }}</div>
         <div class="cat-info">
@@ -100,7 +101,7 @@
           <div class="section-eyebrow">Öne çıkanlar</div>
           <h2 class="section-title">Bu hafta öne çıkardıklarımız</h2>
         </div>
-        <RouterLink to="/katalog" class="btn btn-ghost">Tümünü gör →</RouterLink>
+        <RouterLink to="/katalog" class="btn btn-ghost" @click="trackEvent('clickHomeFeaturedViewAll')">Tümünü gör →</RouterLink>
       </div>
       <div class="moto-grid">
         <MotoCard v-for="m in featured.slice(0, 6)" :key="m.id" :motor="m" />
@@ -149,7 +150,7 @@
           <p v-if="settings.address">{{ settings.address }}<span v-if="settings.working_hours"> · {{ settings.working_hours }}</span></p>
           <p v-else>Atatürk Caddesi No: 123, Büyükçekmece. Hafta içi 09:00–19:00, Cumartesi 10:00–18:00.</p>
         </div>
-        <RouterLink to="/iletisim" class="btn btn-primary btn-lg">Konum ve iletişim →</RouterLink>
+        <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeShowroomContactCta')">Konum ve iletişim →</RouterLink>
       </div>
     </section>
   </main>
@@ -157,13 +158,16 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
 import { useCategoryStore, useSettingsStore } from '../stores/site';
 import { formatPrice } from '../data/seed';
+import { trackEvent } from '../lib/analytics';
 import MotoCard from '../components/MotoCard.vue';
 import MotoImage from '../components/MotoImage.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
 
+const router = useRouter();
 const store = useMotorStore();
 const categoryStore = useCategoryStore();
 const settingsStore = useSettingsStore();
@@ -199,5 +203,10 @@ function escapeHtml(s) {
 
 function countByCategory(slug) {
   return store.motors.filter((m) => m.category === slug).length;
+}
+
+function openFeaturedCard(m) {
+  trackEvent('clickHomeHeroFeaturedCard');
+  router.push(`/motor/${m.slug}`);
 }
 </script>

@@ -9,7 +9,7 @@
         v-if="recent.ids.length"
         type="button"
         class="btn btn-ghost btn-sm"
-        @click="recent.clear()"
+        @click="recent.clear(); trackEvent('clickRecentlyViewedClearHistory')"
       >Geçmişi temizle</button>
     </div>
     <div class="moto-grid">
@@ -23,6 +23,7 @@ import { computed } from 'vue';
 import { useMotorStore } from '../stores/motors';
 import { useRecentStore } from '../stores/recent';
 import MotoCard from './MotoCard.vue';
+import { trackEvent } from '../lib/analytics';
 
 const props = defineProps({
   excludeId: { type: String, default: null },

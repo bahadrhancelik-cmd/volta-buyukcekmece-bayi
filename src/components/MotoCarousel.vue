@@ -22,14 +22,14 @@
         v-if="activePhotos.length > 1"
         class="moto-carousel-arrow prev"
         type="button"
-        @click="prev"
+        @click="prev(); trackEvent('clickCarouselPrevPhoto')"
         aria-label="Önceki fotoğraf"
       >‹</button>
       <button
         v-if="activePhotos.length > 1"
         class="moto-carousel-arrow next"
         type="button"
-        @click="next"
+        @click="next(); trackEvent('clickCarouselNextPhoto')"
         aria-label="Sonraki fotoğraf"
       >›</button>
     </div>
@@ -55,7 +55,7 @@
         class="moto-carousel-thumb"
         :class="{ active: i === index }"
         :style="{ backgroundImage: `url(${p})` }"
-        @click="index = i"
+        @click="index = i; trackEvent('clickCarouselThumbnail')"
         :aria-label="`Fotoğraf ${i + 1}`"
       ></button>
     </div>
@@ -65,6 +65,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import MotoSilhouette from './MotoSilhouette.vue';
+import { trackEvent } from '../lib/analytics';
 
 const props = defineProps({
   motor: { type: Object, required: true },
@@ -124,6 +125,7 @@ function onTouchEnd(e) {
   touchStartY = null;
   if (Math.abs(dx) < SWIPE_THRESHOLD) return;
   if (Math.abs(dy) > Math.abs(dx)) return; // mostly-vertical → ignore
+  trackEvent('swipeCarouselPhoto');
   if (dx > 0) prev();
   else next();
 }

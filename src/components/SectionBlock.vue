@@ -46,6 +46,7 @@
         v-if="ctaHref && ctaLabel"
         :to="ctaHref"
         class="btn btn-primary btn-lg"
+        @click="trackEvent('clickSectionCtaButton')"
       >{{ ctaLabel }}</RouterLink>
     </div>
   </section>
@@ -53,6 +54,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { trackEvent } from '../lib/analytics';
 
 const props = defineProps({
   section: { type: Object, required: true },

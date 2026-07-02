@@ -12,32 +12,32 @@
 
     <section class="container catalog-toolbar">
       <div class="filter-tabs">
-        <button :class="{ active: filter === 'all' }" @click="filter = 'all'">
+        <button :class="{ active: filter === 'all' }" @click="filter = 'all'; trackEvent('clickCatalogFilterAllTab')">
           Tümü <span class="count">{{ store.motors.length }}</span>
         </button>
         <button
           v-for="c in categoryStore.sorted"
           :key="c.id"
           :class="{ active: filter === c.slug }"
-          @click="filter = c.slug"
+          @click="filter = c.slug; trackEvent('clickCatalogFilterCategoryTab')"
         >
           {{ c.label }} <span class="count">{{ countByCategory(c.slug) }}</span>
         </button>
       </div>
 
       <div class="toolbar-right">
-        <select v-model="stockFilter" class="select">
+        <select v-model="stockFilter" class="select" @change="trackEvent('changeCatalogStockFilter')">
           <option value="all">Stok durumu</option>
           <option value="in">Stokta</option>
           <option value="out">Tükendi</option>
         </select>
-        <select v-model="sort" class="select">
+        <select v-model="sort" class="select" @change="trackEvent('changeCatalogSortOption')">
           <option value="order">Önerilen</option>
           <option value="price-asc">Fiyat ↑</option>
           <option value="price-desc">Fiyat ↓</option>
           <option value="name-asc">İsim A→Z</option>
         </select>
-        <select v-model="layout" class="select">
+        <select v-model="layout" class="select" @change="trackEvent('changeCatalogLayoutOption')">
           <option value="grid">Grid</option>
           <option value="list">Liste</option>
         </select>
@@ -65,6 +65,7 @@ import { useRoute } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
 import { useCategoryStore } from '../stores/site';
 import MotoCard from '../components/MotoCard.vue';
+import { trackEvent } from '../lib/analytics';
 
 const route = useRoute();
 const store = useMotorStore();

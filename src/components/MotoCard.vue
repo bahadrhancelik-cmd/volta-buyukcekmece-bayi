@@ -61,6 +61,7 @@ import StockBadge from './StockBadge.vue';
 import ColorDots from './ColorDots.vue';
 import { formatPrice } from '../data/seed';
 import { useCategoryStore } from '../stores/site';
+import { trackEvent } from '../lib/analytics';
 
 const categoryStore = useCategoryStore();
 
@@ -71,6 +72,7 @@ const props = defineProps({
 
 const router = useRouter();
 function goDetail() {
+  trackEvent('clickMotoCard');
   router.push(`/motor/${props.motor.slug}`);
 }
 

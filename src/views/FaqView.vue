@@ -42,6 +42,7 @@
 import { ref, computed, onMounted, watchEffect } from 'vue';
 import { useFaqStore, usePageSectionsStore } from '../stores/site';
 import SectionBlock from '../components/SectionBlock.vue';
+import { trackEvent } from '../lib/analytics';
 
 const faqStore = useFaqStore();
 const pageStore = usePageSectionsStore();
@@ -59,6 +60,7 @@ onMounted(() => {
 });
 
 function toggle(i) {
+  trackEvent('clickFaqQuestionToggle');
   openIndex.value = openIndex.value === i ? -1 : i;
 }
 

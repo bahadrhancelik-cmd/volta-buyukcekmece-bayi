@@ -1,12 +1,12 @@
 <template>
   <main v-if="!motor" class="container empty-page">
     <h2>Model bulunamadı</h2>
-    <RouterLink to="/katalog" class="btn btn-primary">Kataloğa dön</RouterLink>
+    <RouterLink to="/katalog" class="btn btn-primary" @click="trackEvent('clickDetailNotFoundBackToCatalog')">Kataloğa dön</RouterLink>
   </main>
 
   <main v-else class="detail-page">
     <div class="container">
-      <RouterLink to="/katalog" class="breadcrumb">← Katalog</RouterLink>
+      <RouterLink to="/katalog" class="breadcrumb" @click="trackEvent('clickDetailBreadcrumbCatalog')">← Katalog</RouterLink>
 
       <div class="detail-grid">
         <div class="detail-image-side">
@@ -57,7 +57,7 @@
                 v-for="(c, i) in motor.colors" :key="i"
                 class="color-pick"
                 :class="{ active: selectedColor === i }"
-                @click="selectedColor = i"
+                @click="selectedColor = i; trackEvent('clickDetailColorOption')"
                 :aria-label="`Renk ${i + 1}`"
               >
                 <span :style="{ background: c }"></span>
@@ -66,8 +66,8 @@
           </div>
 
           <div class="detail-cta-row">
-            <RouterLink to="/iletisim" class="btn btn-primary btn-lg">Bayiden bilgi al</RouterLink>
-            <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg">Hemen ara</a>
+            <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Bayiden bilgi al</RouterLink>
+            <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
           </div>
         </div>
       </div>
@@ -95,6 +95,7 @@ import StockBadge from '../components/StockBadge.vue';
 import MotoCard from '../components/MotoCard.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
 import { useRecentStore } from '../stores/recent';
+import { trackEvent } from '../lib/analytics';
 
 const route = useRoute();
 const store = useMotorStore();

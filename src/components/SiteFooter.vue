@@ -30,11 +30,11 @@
       <div class="footer-cols">
         <div>
           <h4>Site</h4>
-          <RouterLink to="/">Ana Sayfa</RouterLink>
-          <RouterLink to="/katalog">Modeller</RouterLink>
-          <RouterLink to="/hakkimizda">Hakkımızda</RouterLink>
-          <RouterLink to="/sss">SSS</RouterLink>
-          <RouterLink to="/iletisim">İletişim</RouterLink>
+          <RouterLink to="/" @click="trackEvent('clickFooterNavHome')">Ana Sayfa</RouterLink>
+          <RouterLink to="/katalog" @click="trackEvent('clickFooterNavCatalog')">Modeller</RouterLink>
+          <RouterLink to="/hakkimizda" @click="trackEvent('clickFooterNavAbout')">Hakkımızda</RouterLink>
+          <RouterLink to="/sss" @click="trackEvent('clickFooterNavFaq')">SSS</RouterLink>
+          <RouterLink to="/iletisim" @click="trackEvent('clickFooterNavContact')">İletişim</RouterLink>
         </div>
         <div v-if="categoryStore.sorted.length">
           <h4>Kategoriler</h4>
@@ -42,6 +42,7 @@
             v-for="c in categoryStore.sorted"
             :key="c.id"
             :to="`/katalog?cat=${c.slug}`"
+            @click="trackEvent('clickFooterCategoryLink')"
           >{{ c.label }}</RouterLink>
         </div>
         <div>
@@ -62,6 +63,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useSettingsStore, useCategoryStore } from '../stores/site';
+import { trackEvent } from '../lib/analytics';
 
 const settingsStore = useSettingsStore();
 const categoryStore = useCategoryStore();
