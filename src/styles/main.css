@@ -2941,3 +2941,4 @@ img { max-width: 100%; display: block; }
 .kampanya-serit em{font-style:normal;font-weight:700;text-decoration:underline}
 .sale-tag.kampanya-tag{background:#95C11F;color:#14212D}
 .kampanya-hediye{margin-top:10px;display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(149,193,31,.15);color:var(--navy);font-weight:600;font-size:14px}
+.kampanya-taksit{margin-top:8px;font-weight:600;font-size:14px;color:#5f7d10}

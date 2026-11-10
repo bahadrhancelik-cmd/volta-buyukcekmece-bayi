@@ -41,6 +41,7 @@
               <span v-if="motor.kampanya" class="detail-discount-badge">1.111 TL indirim</span>
               <span v-else-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
             </div>
+            <div v-if="motor.kampanya" class="kampanya-taksit">💳 Kredi kartına vade farksız 6 taksit</div>
             <div v-if="hediye" class="kampanya-hediye">🎁 {{ KAMPANYA.hediye.metin }}
             </div>
           </div>
