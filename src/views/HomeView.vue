@@ -14,6 +14,12 @@
           </div>
           <h1 class="hero-title">{{ heroTitle }}</h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
+          <div class="hero-taksit">
+            <span class="hero-taksit-ikon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+            </span>
+            <span>Kredi kartına <strong>vade farksız 6&nbsp;taksit</strong></span>
+          </div>
           <div class="hero-ctas">
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
@@ -33,6 +39,12 @@
           </div>
           <h1 class="hero-title" v-html="heroTitleSplit"></h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
+          <div class="hero-taksit">
+            <span class="hero-taksit-ikon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+            </span>
+            <span>Kredi kartına <strong>vade farksız 6&nbsp;taksit</strong></span>
+          </div>
           <div class="hero-ctas">
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
@@ -61,6 +73,10 @@
             <div class="hero-stat">
               <div class="stat-num">2 yıl</div>
               <div class="stat-label">Garanti</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num">6 taksit</div>
+              <div class="stat-label">Vade farksız</div>
             </div>
           </div>
         </div>
