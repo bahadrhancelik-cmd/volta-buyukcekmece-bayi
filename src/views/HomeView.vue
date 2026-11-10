@@ -18,7 +18,7 @@
             <span class="hero-taksit-ikon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             </span>
-            <span>Kredi kartına <strong>vade farksız 6&nbsp;taksit</strong></span>
+            <span class="hero-taksit-metin"><strong>Vade farksız 6&nbsp;taksit</strong><small>Kredi kartına, ek ücret olmadan</small></span>
           </div>
           <div class="hero-ctas">
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
@@ -43,7 +43,7 @@
             <span class="hero-taksit-ikon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             </span>
-            <span>Kredi kartına <strong>vade farksız 6&nbsp;taksit</strong></span>
+            <span class="hero-taksit-metin"><strong>Vade farksız 6&nbsp;taksit</strong><small>Kredi kartına, ek ücret olmadan</small></span>
           </div>
           <div class="hero-ctas">
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
@@ -73,10 +73,6 @@
             <div class="hero-stat">
               <div class="stat-num">2 yıl</div>
               <div class="stat-label">Garanti</div>
-            </div>
-            <div class="hero-stat">
-              <div class="stat-num">6 taksit</div>
-              <div class="stat-label">Vade farksız</div>
             </div>
           </div>
         </div>
