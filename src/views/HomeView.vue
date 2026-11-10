@@ -152,8 +152,8 @@
           </div>
           <div class="why-card">
             <div class="why-num">03</div>
-            <h3>Garanti & satış sonrası</h3>
-            <p>Tüm ürünler Volta garantisinde. Bakım ve servis ihtiyacınızda sizi Volta yetkili servisine yönlendiriyoruz.</p>
+            <h3>Garanti, yedek parça &amp; servis</h3>
+            <p>Tüm ürünler Volta garantisinde. Mağazamızda orijinal Volta yedek parçası satıyoruz; bakım ve servis ihtiyacınızda sizi Volta yetkili servisine yönlendiriyoruz.</p>
           </div>
           <div class="why-card">
             <div class="why-num">04</div>
