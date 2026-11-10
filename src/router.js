@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from './stores/motors';
 
-const SITE_NAME = 'Volta Motor Büyükçekmece Bayi';
+const SITE_NAME = 'Volta Motor Büyükçekmece';
 const DEFAULT_DESC = 'Volta Motor Büyükçekmece yetkili bayi. Elektrikli scooter, ATV ve elektrikli bisiklet modelleri, fiyatlar ve özellikler.';
 
 const routes = [

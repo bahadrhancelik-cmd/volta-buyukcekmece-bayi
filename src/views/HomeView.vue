@@ -39,6 +39,16 @@
             </RouterLink>
             <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Bayiyi ziyaret et →</RouterLink>
           </div>
+          <RouterLink to="/iletisim" class="showroom-callout" @click="trackEvent('clickHomeShowroomCallout')">
+            <span class="showroom-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            </span>
+            <span class="showroom-text">
+              <strong>Showroom'da görün, yerinde karar verin</strong>
+              <span>Tüm modelleri Beykent'teki mağazamızda detaylı inceleyin · Her gün 10:00–19:00</span>
+            </span>
+            <span class="showroom-go" aria-hidden="true">Yol tarifi →</span>
+          </RouterLink>
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="stat-num">{{ store.motors.length }}</div>
@@ -85,7 +95,7 @@
         class="cat-card"
         @click="trackEvent('clickHomeCategoryCard')"
       >
-        <div class="cat-num">{{ countByCategory(c.slug) }}</div>
+        <img v-if="categoryPhoto(c.slug)" :src="categoryPhoto(c.slug)" alt="" class="cat-thumb" loading="lazy" />
         <div class="cat-info">
           <h3>{{ c.label }}</h3>
           <p>{{ countByCategory(c.slug) }} model</p>
@@ -201,6 +211,10 @@ function escapeHtml(s) {
   }[m]));
 }
 
+function categoryPhoto(slug) {
+  const m = store.motors.find((x) => x.category === slug && x.photos && x.photos.length);
+  return m ? m.photos[0] : null;
+}
 function countByCategory(slug) {
   return store.motors.filter((m) => m.category === slug).length;
 }
