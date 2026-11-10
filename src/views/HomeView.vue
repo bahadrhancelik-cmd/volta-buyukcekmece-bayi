@@ -167,6 +167,7 @@
       <div class="section-head center">
         <div class="section-eyebrow">Teslimatlarımız</div>
         <h2 id="teslimat-baslik" class="section-title">Yeni araçları hayırlı olsun!</h2>
+        <p class="delivery-hint">1000'den fazla mutlu müşteri · kaydırarak bakın →</p>
       </div>
       <div class="delivery-grid">
         <img v-for="n in 12" :key="n" :src="`/galeri/teslimat-${n}.jpg`" :alt="`Volta Motor Büyükçekmece Fabrika Satış Mağazası önünde teslimat ${n}`" width="600" height="750" loading="lazy" decoding="async" />

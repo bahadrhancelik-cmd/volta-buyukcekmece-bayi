@@ -2983,9 +2983,13 @@ img { max-width: 100%; display: block; }
 /* Mağaza + teslimat galerisi */
 .gallery-section { padding-top: 56px; padding-bottom: 8px; }
 .store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
-.delivery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 24px; }
+.delivery-grid { display: flex; gap: 10px; margin-top: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+.delivery-grid img { flex: 0 0 auto; scroll-snap-align: start; }
 .store-grid img, .delivery-grid img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; display: block; background: var(--surface-2); }
 @media (max-width: 900px) {
   .store-grid { grid-template-columns: repeat(2, 1fr); }
-  .delivery-grid { grid-template-columns: repeat(3, 1fr); }
 }
+.delivery-hint { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
+
+.delivery-grid img { width: 150px; }
+@media (max-width: 900px) { .delivery-grid img { width: 120px; } }
