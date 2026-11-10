@@ -47,7 +47,7 @@ export function urunSSS(m, kategoriEtiketi) {
   }
   liste.push({ s: `${ad} taksitle alınabilir mi?`, c: `Evet. Kredi kartına ${TAKSIT_SAYISI} aya varan vade farksız taksit yapılır; fiyata vergiler dahildir.` });
   liste.push({ s: `${ad} mağazada var mı, görebilir miyim?`, c: m.inStock
-    ? `Evet, şu an stokta. Beykent'teki mağazamızda her gün 10:00–19:00 arası detaylı inceleyebilirsiniz.`
+    ? `Evet, şu an stokta. Beykent'teki mağazamızda Pazartesi–Cumartesi 10:00–19:30, Pazar 10:00–19:00 arası detaylı inceleyebilirsiniz.`
     : `Şu an stokta yok. Sayfadaki "Gelince haber ver" formunu doldurursanız stoğa girdiğinde sizi ararız; benzer modelleri mağazamızda inceleyebilirsiniz.` });
   liste.push({ s: `Garanti süresi ne kadar?`, c: `Tüm ürünlerimiz Volta Motor güvencesiyle 2 yıl garantilidir.` });
   void kategoriEtiketi;

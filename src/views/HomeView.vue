@@ -45,7 +45,7 @@
             </span>
             <span class="showroom-text">
               <strong>Showroom'da görün, yerinde karar verin</strong>
-              <span>Tüm modelleri Beykent'teki mağazamızda detaylı inceleyin · Her gün 10:00–19:00</span>
+              <span>Tüm modelleri Beykent'teki mağazamızda detaylı inceleyin · Her gün 10:00'dan itibaren açığız</span>
             </span>
             <span class="showroom-go" aria-hidden="true">Yol tarifi →</span>
           </a>
@@ -183,7 +183,7 @@
         <div>
           <h2>Showroom'umuzu ziyaret edin.</h2>
           <p v-if="settings.address">{{ settings.address }}<span v-if="settings.working_hours"> · {{ settings.working_hours }}</span></p>
-          <p v-else>Pınartepe Mah. Avrupa Cd. No:83T, Beykent, Büyükçekmece. Her gün 10:00–19:00.</p>
+          <p v-else>Pınartepe Mah. Avrupa Cd. No:83T, Beykent, Büyükçekmece. Pzt–Cmt 10:00–19:30, Pazar 10:00–19:00.</p>
         </div>
         <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeShowroomContactCta')">Konum ve iletişim →</RouterLink>
       </div>
