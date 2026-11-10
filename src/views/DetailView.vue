@@ -39,6 +39,7 @@
               <span class="detail-price">{{ formatPrice(motor.price) }}</span>
               <span v-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
             </div>
+            <div class="detail-taksit">veya <strong>{{ taksit }}</strong> · kredi kartına vade farksız taksit</div>
           </div>
 
           <div v-if="specsList.length" class="detail-specs">
@@ -84,11 +85,20 @@
           </div>
 
           <div class="detail-cta-row">
+            <a :href="waLink" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" @click="trackEvent('clickDetailWhatsappCta')">WhatsApp'tan sor</a>
             <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Mağazadan bilgi al</RouterLink>
             <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
           </div>
         </div>
       </div>
+
+      <section v-if="sss.length" class="detail-faq">
+        <h2 class="section-title">{{ motor.name }} hakkında sık sorulanlar</h2>
+        <details v-for="(q, i) in sss" :key="i" class="faq-item" :open="i === 0">
+          <summary>{{ q.s }}</summary>
+          <p>{{ q.c }}</p>
+        </details>
+      </section>
 
       <section v-if="related.length" class="related">
         <h2 class="section-title">Benzer modeller</h2>
@@ -103,6 +113,7 @@
 </template>
 
 <script setup>
+import { taksitMetni, whatsappLink, urunWhatsappMetni, urunSSS } from '../lib/magaza';
 import { ref, computed, watch, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
@@ -133,6 +144,9 @@ const related = computed(() => {
 });
 
 // Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
+const taksit = computed(() => taksitMetni(motor.value?.price));
+const waLink = computed(() => whatsappLink(urunWhatsappMetni(motor.value?.name || '')));
+const sss = computed(() => (motor.value ? urunSSS(motor.value) : []));
 const onSale = computed(() => Number(motor.value?.comparePrice) > Number(motor.value?.price));
 
 const discountPercent = computed(() => {
@@ -214,7 +228,7 @@ watchEffect(() => {
 });
 
 // Per-motor SEO: title + meta description + Product JSON-LD
-let jsonLdEl = null;
+let jsonLdEl = typeof document !== 'undefined' ? document.querySelector('script[data-detail-jsonld]') : null;
 watchEffect(() => {
   if (typeof document === 'undefined') return;
   const m = motor.value;

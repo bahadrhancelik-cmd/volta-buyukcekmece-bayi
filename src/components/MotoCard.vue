@@ -22,6 +22,7 @@
         <span v-if="onSale" class="moto-card-compare">{{ formatPrice(motor.comparePrice) }}</span>
         <span class="moto-card-price">{{ formatPrice(motor.price) }}</span>
       </div>
+      <div class="moto-card-taksit">{{ taksit }} taksit</div>
       <button class="btn-link">İncele →</button>
     </div>
   </article>
@@ -47,6 +48,7 @@
         <div class="moto-card-price-stack inline">
           <span v-if="onSale" class="moto-card-compare">{{ formatPrice(motor.comparePrice) }}</span>
           <span class="moto-card-price">{{ formatPrice(motor.price) }}</span>
+          <span class="moto-card-taksit">{{ taksit }} taksit</span>
         </div>
       </div>
     </div>
@@ -54,6 +56,7 @@
 </template>
 
 <script setup>
+import { taksitMetni } from '../lib/magaza';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import MotoImage from './MotoImage.vue';
@@ -77,6 +80,7 @@ function goDetail() {
 }
 
 // Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
+const taksit = computed(() => taksitMetni(props.motor.price));
 const onSale = computed(() => Number(props.motor.comparePrice) > Number(props.motor.price));
 const discountPercent = computed(() =>
   onSale.value ? Math.round((1 - Number(props.motor.price) / Number(props.motor.comparePrice)) * 100) : 0

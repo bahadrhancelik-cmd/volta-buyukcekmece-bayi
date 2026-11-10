@@ -2948,3 +2948,20 @@ img { max-width: 100%; display: block; }
 [data-theme="dark"] .brand-city-koyu { display: block; }
 .brand-city-sub { margin-top: 6px; }
 @media (max-width: 640px) { .brand-city-img { height: 12px; } .brand-city-sub { margin-top: 5px; } }
+
+/* WhatsApp: sabit düğme + ürün sayfası düğmesi */
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px 12px 14px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.wa-float:hover{background:#1ebe5b}
+@media (max-width:640px){.wa-float{padding:12px;right:14px;bottom:14px}.wa-float-text{display:none}}
+.btn-whatsapp{background:#25D366;color:#fff;border-color:#25D366}
+.btn-whatsapp:hover{background:#1ebe5b;border-color:#1ebe5b;color:#fff}
+/* Taksit */
+.moto-card-taksit{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+.moto-card-price-stack.inline .moto-card-taksit{display:block;text-align:right}
+.detail-taksit{margin-top:8px;font-size:14px;color:var(--muted)}
+.detail-taksit strong{color:var(--navy)}
+/* Ürün sayfası SSS */
+.detail-faq{margin-top:48px;max-width:820px}
+.detail-faq .faq-item{border:1px solid var(--border, #e7e5e4);border-radius:14px;padding:14px 18px;margin-top:10px;background:var(--surface, #fff)}
+.detail-faq summary{cursor:pointer;font-weight:600;color:var(--navy)}
+.detail-faq p{margin:10px 0 0;color:var(--muted);line-height:1.6}

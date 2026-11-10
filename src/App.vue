@@ -3,6 +3,7 @@
     <SiteHeader v-if="!isAdminRoute" />
     <RouterView />
     <SiteFooter v-if="!isAdminRoute" />
+    <WhatsAppButton v-if="!isAdminRoute" />
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import SiteHeader from './components/SiteHeader.vue';
 import SiteFooter from './components/SiteFooter.vue';
+import WhatsAppButton from './components/WhatsAppButton.vue';
 import { useMotorStore } from './stores/motors';
 import { useCategoryStore, useSettingsStore, useFaqStore } from './stores/site';
 
