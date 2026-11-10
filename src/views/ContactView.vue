@@ -48,7 +48,7 @@
             style="border:0; min-height: 360px;"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            :title="`Konum: ${settings.address || 'Volta Büyükçekmece Bayi'}`"
+            :title="`Konum: ${settings.address || 'Volta Motor Büyükçekmece'}`"
           ></iframe>
           <div v-else class="map-placeholder">
             <svg viewBox="0 0 600 400" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -68,7 +68,7 @@
               </g>
             </svg>
             <div class="map-tag">
-              <strong>Volta Büyükçekmece Bayi</strong>
+              <strong>Volta Motor Büyükçekmece</strong>
               <span v-if="settings.address">{{ firstLine(settings.address) }}</span>
             </div>
           </div>
@@ -119,7 +119,7 @@
             style="border:0; min-height: 360px;"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            :title="`Konum: ${settings.address || 'Volta Büyükçekmece Bayi'}`"
+            :title="`Konum: ${settings.address || 'Volta Motor Büyükçekmece'}`"
           ></iframe>
           <div v-else class="map-placeholder">
             <svg viewBox="0 0 600 400" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -139,7 +139,7 @@
               </g>
             </svg>
             <div class="map-tag">
-              <strong>Volta Büyükçekmece Bayi</strong>
+              <strong>Volta Motor Büyükçekmece</strong>
               <span v-if="settings.address">{{ firstLine(settings.address) }}</span>
             </div>
           </div>

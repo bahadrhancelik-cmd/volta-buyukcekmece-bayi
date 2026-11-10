@@ -220,7 +220,7 @@ watchEffect(() => {
   const m = motor.value;
   if (!m) return;
   const catLabel = categoryStore.labelOf(m.category);
-  document.title = `${m.name} · Volta Motor Büyükçekmece Bayi`;
+  document.title = `${m.name} · Volta Motor Büyükçekmece`;
   const specSummary = specsList.value
     .map((s) => `${s.label} ${s.value}${s.unit ? ' ' + s.unit : ''}`)
     .join(', ');

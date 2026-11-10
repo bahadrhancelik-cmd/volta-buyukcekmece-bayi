@@ -17,7 +17,7 @@
             </span>
             <span class="brand-text">
               <span class="brand-name">VOLTA</span>
-              <span class="brand-sub">Büyükçekmece Bayi</span>
+              <span class="brand-sub">Büyükçekmece Fabrika Satış Mağazası</span>
             </span>
           </template>
         </div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="footer-bottom container">
-      <span>© {{ year }} Volta Büyükçekmece Bayi</span>
+      <span>© {{ year }} Volta Motor Büyükçekmece</span>
       <span v-if="settings.working_hours" class="footer-meta">{{ settings.working_hours }}</span>
     </div>
   </footer>
