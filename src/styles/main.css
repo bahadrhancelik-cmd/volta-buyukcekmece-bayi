@@ -3034,3 +3034,18 @@ img { max-width: 100%; display: block; }
 .hero-stack-card.stack-1 { top: 14%; bottom: auto; height: auto; }
 .hero-stack-card.stack-1 .hero-stack-image { height: auto; aspect-ratio: 4 / 3; }
 @media (max-width: 920px) { .hero-visual { height: 400px; } .hero-stack-card.stack-1 { top: 10%; height: auto; } }
+
+/* Üst duyuru şeridi (src/components/DuyuruSeridi.vue) */
+.duyuru-seridi { background: #14212D; color: #fff; overflow: hidden; font-size: 13px; font-weight: 500; line-height: 1; }
+.duyuru-akis { display: flex; width: max-content; animation: duyuruKay 40s linear infinite; }
+.duyuru-seridi:hover .duyuru-akis { animation-play-state: paused; }
+.duyuru-liste { display: flex; margin: 0; padding: 0; list-style: none; }
+.duyuru-liste li { display: inline-flex; align-items: center; gap: 10px; padding: 11px 28px; white-space: nowrap; }
+.duyuru-liste li:first-child { color: #95C11F; font-weight: 700; }
+.duyuru-nokta { width: 6px; height: 6px; border-radius: 50%; background: #95C11F; flex-shrink: 0; }
+@keyframes duyuruKay { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .duyuru-akis { animation: none; width: auto; }
+  .duyuru-liste { flex-wrap: wrap; justify-content: center; }
+  .duyuru-liste[aria-hidden="true"] { display: none; }
+}

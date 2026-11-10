@@ -1,5 +1,6 @@
 <template>
   <div>
+    <DuyuruSeridi v-if="!isAdminRoute" />
     <SiteHeader v-if="!isAdminRoute" />
     <RouterView v-slot="{ Component, route: r }">
       <Transition name="sayfa-gecis">
@@ -15,6 +16,7 @@
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import SiteHeader from './components/SiteHeader.vue';
+import DuyuruSeridi from './components/DuyuruSeridi.vue';
 import SiteFooter from './components/SiteFooter.vue';
 import WhatsAppButton from './components/WhatsAppButton.vue';
 import { useMotorStore } from './stores/motors';
