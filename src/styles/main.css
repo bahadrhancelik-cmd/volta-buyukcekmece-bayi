@@ -3014,3 +3014,23 @@ img { max-width: 100%; display: block; }
 .sayfa-gecis-enter-active { transition: opacity .2s ease; }
 .sayfa-gecis-enter-from { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .sayfa-gecis-enter-active { transition: none; } }
+
+/* Ana sayfa üst görsel: ana model büyük, diğerleri önde küçük (11.11.2026) */
+.hero-visual { height: 580px; }
+.hero-stack-card.stack-0 { width: 74%; height: 86%; top: 2%; right: 0; transform: rotate(1.5deg); z-index: 2; }
+.hero-stack-card.stack-1 { width: 40%; height: 46%; top: auto; bottom: 0; left: 0; transform: rotate(-4deg); z-index: 3; box-shadow: var(--shadow-lg); }
+.hero-stack-card.stack-2 { display: none; }
+.hero-stack-card.stack-0 .hero-stack-image { height: 82%; }
+.hero-stack-card.stack-0 .hero-stack-meta { padding: 14px 20px; }
+.hero-stack-card.stack-0 .hero-stack-name { font-size: 19px; font-weight: 700; }
+.hero-stack-card.stack-0 .hero-stack-price { font-size: 16px; font-weight: 600; color: var(--navy, #14212D); }
+@media (max-width: 920px) {
+  .hero-visual { height: 440px; }
+  .hero-stack-card.stack-0 { width: 80%; height: 88%; }
+  .hero-stack-card.stack-1 { width: 44%; height: 44%; }
+  .hero-stack-card.stack-0 .hero-stack-name { font-size: 16px; }
+  .hero-stack-card.stack-0 .hero-stack-price { font-size: 14px; }
+}
+.hero-stack-card.stack-1 { top: 14%; bottom: auto; height: auto; }
+.hero-stack-card.stack-1 .hero-stack-image { height: auto; aspect-ratio: 4 / 3; }
+@media (max-width: 920px) { .hero-visual { height: 400px; } .hero-stack-card.stack-1 { top: 10%; height: auto; } }
