@@ -57,6 +57,15 @@ const routes = [
     },
   },
   {
+    path: '/kvkk',
+    name: 'kvkk',
+    component: () => import('./views/KvkkView.vue'),
+    meta: {
+      title: `KVKK Aydınlatma Metni · ${SITE_NAME}`,
+      description: 'CDH Motor (Volta Motor Büyükçekmece) kişisel verilerin işlenmesine ilişkin aydınlatma metni.',
+    },
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: () => import('./views/admin/AdminLayout.vue'),

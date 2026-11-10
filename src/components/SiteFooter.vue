@@ -35,6 +35,7 @@
           <RouterLink to="/hakkimizda" @click="trackEvent('clickFooterNavAbout')">Hakkımızda</RouterLink>
           <RouterLink to="/sss" @click="trackEvent('clickFooterNavFaq')">SSS</RouterLink>
           <RouterLink to="/iletisim" @click="trackEvent('clickFooterNavContact')">İletişim</RouterLink>
+          <RouterLink to="/kvkk">KVKK Aydınlatma Metni</RouterLink>
         </div>
         <div v-if="categoryStore.sorted.length">
           <h4>Kategoriler</h4>

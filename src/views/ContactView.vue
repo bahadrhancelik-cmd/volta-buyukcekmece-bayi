@@ -172,6 +172,7 @@
               <span>Mesajınız</span>
               <textarea rows="5" required v-model="form.message" placeholder="İlgilendiğiniz model, sorunuz..."></textarea>
             </label>
+            <p class="full" style="font-size:.85rem;color:#5b6770;margin:0">Formda paylaştığınız ad, telefon ve mesaj bilgileri, talebinize dönüş yapmak amacıyla işlenir. Ayrıntılı bilgi: <RouterLink to="/kvkk">KVKK Aydınlatma Metni</RouterLink>.</p>
             <div class="form-bottom">
               <button type="submit" class="btn btn-primary btn-lg" :disabled="sending">
                 {{ sending ? 'Gönderiliyor…' : 'Gönder' }}
