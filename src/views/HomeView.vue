@@ -45,8 +45,8 @@
               <div class="stat-label">Modelimiz</div>
             </div>
             <div class="hero-stat">
-              <div class="stat-num">12+</div>
-              <div class="stat-label">Yıllık deneyim</div>
+              <div class="stat-num">Yetkili</div>
+              <div class="stat-label">Volta bayisi</div>
             </div>
             <div class="hero-stat">
               <div class="stat-num">2 yıl</div>

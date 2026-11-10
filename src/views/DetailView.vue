@@ -112,12 +112,8 @@ const related = computed(() => {
     .slice(0, 3);
 });
 
-const onSale = computed(() => {
-  const m = motor.value;
-  if (!m) return false;
-  const cp = Number(m.comparePrice);
-  return Number.isFinite(cp) && cp > Number(m.price);
-});
+// İndirim gösterimi kapalı (bkz. MotoCard.vue).
+const onSale = computed(() => false);
 
 const discountPercent = computed(() => {
   if (!onSale.value) return 0;

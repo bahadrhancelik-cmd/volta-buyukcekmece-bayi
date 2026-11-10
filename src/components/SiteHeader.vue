@@ -2,23 +2,11 @@
   <header class="site-header">
     <div class="container header-inner">
       <RouterLink to="/" class="brand" @click="trackEvent('clickHeaderLogo')">
-        <img
-          v-if="settings.logo_url"
-          :src="settings.logo_url"
-          alt="Logo"
-          class="brand-logo-img"
-        />
-        <template v-else>
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="28" height="28">
-              <path d="M 8 4 L 16 28 L 24 4 L 19 4 L 16 18 L 13 4 Z" fill="currentColor" />
-            </svg>
-          </span>
-          <span class="brand-text">
-            <span class="brand-name">VOLTA</span>
-            <span class="brand-sub">Büyükçekmece Bayi</span>
-          </span>
-        </template>
+        <img src="/logo-volta.png" alt="Volta" class="brand-logo-img" width="640" height="266" />
+        <span class="brand-lockup">
+          <span class="brand-city">BÜYÜKÇEKMECE</span>
+          <span class="brand-city-sub">Fabrika Satış Mağazası</span>
+        </span>
       </RouterLink>
 
       <nav class="site-nav" :class="{ open: menuOpen }">
@@ -79,7 +67,7 @@
           </svg>
           <span>{{ settings.phone }}</span>
         </a>
-        <RouterLink to="/katalog" class="btn btn-primary" @click="trackEvent('clickHeaderViewModelsCta')">Modelleri Gör</RouterLink>
+        <RouterLink to="/katalog" class="btn btn-primary header-cta" @click="trackEvent('clickHeaderViewModelsCta')">Modelleri Gör</RouterLink>
         <button class="menu-toggle" @click="menuOpen = !menuOpen; trackEvent('clickHeaderMenuToggle')" aria-label="Menü">
           <span></span><span></span><span></span>
         </button>

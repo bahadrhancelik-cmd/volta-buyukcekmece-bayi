@@ -76,10 +76,9 @@ function goDetail() {
   router.push(`/motor/${props.motor.slug}`);
 }
 
-const onSale = computed(() => {
-  const cp = Number(props.motor.comparePrice);
-  return Number.isFinite(cp) && cp > Number(props.motor.price);
-});
+// İndirim rozeti ve üstü çizili fiyat kapalı: Reklam Yönetmeliği gereği indirimde
+// eski fiyat + kampanya tarih aralığı gösterilmeli; sitede tarih alanı yok.
+const onSale = computed(() => false);
 
 const topSpecs = computed(() => {
   const list = Array.isArray(props.motor.specs) ? props.motor.specs : [];
