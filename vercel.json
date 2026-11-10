@@ -1,20 +1,226 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(robots.txt|sitemap.xml|favicon.svg)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/motor/lit",
+      "destination": "/motor/volta-vsm-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/cyclone",
+      "destination": "/motor/volta-vsx-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/rks-max",
+      "destination": "/motor/volta-vs1-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vs2",
+      "destination": "/motor/volta-vs2-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/urban-x",
+      "destination": "/motor/volta-se-03-max-elektrikli-iki-tekerlekli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/apec-apm2",
+      "destination": "/motor/volta-apm2-uc-tekerlekli-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/apec-apm5",
+      "destination": "/motor/volta-apm5-uc-tekerlekli-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vm2",
+      "destination": "/motor/volta-vm2-uc-tekerlekli-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vm5-neo",
+      "destination": "/motor/volta-vm5-neo-uc-tekerlekli-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/vg2-elektrikli-dort-tekerlekli-golf-arabasi",
+      "destination": "/motor/volta-vg2-elektrikli-dort-tekerlekli-golf-arabasi",
+      "permanent": true
+    },
+    {
+      "source": "/motor/apec-apt4",
+      "destination": "/motor/volta-apt4-uc-tekerlekli-elektrikli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vt5",
+      "destination": "/motor/volta-vt5-elektrikli-uc-tekerlekli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vt5-pro",
+      "destination": "/motor/volta-vt5-pro-elektrikli-uc-tekerlekli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vt7-pro",
+      "destination": "/motor/volta-vt7-pro-elektrikli-uc-tekerlekli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rsx4",
+      "destination": "/motor/volta-rsx4-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rsx5",
+      "destination": "/motor/volta-rsx5-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rsx6",
+      "destination": "/motor/volta-rsx6-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/rsx7-benzinli-motosiklet-lacivert",
+      "destination": "/motor/volta-rsx7-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/e-bike-city",
+      "destination": "/motor/volta-rs4-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rs6",
+      "destination": "/motor/volta-rs6-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rt3",
+      "destination": "/motor/volta-rt3-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/e-bike-trail",
+      "destination": "/motor/volta-apx7-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/ps3",
+      "destination": "/motor/volta-ps3-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/apec-ps5",
+      "destination": "/motor/volta-ps5-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/apec-ps4",
+      "destination": "/motor/volta-ps4-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/demon-gr250r",
+      "destination": "/motor/volta-demon-gr250r-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vb2-pro",
+      "destination": "/motor/volta-vb2-pro-elektrikli-bisiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vb1-neo",
+      "destination": "/motor/volta-vb1-neo-elektrikli-bisiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vb3",
+      "destination": "/motor/volta-vb3-elektrikli-bisiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vb4",
+      "destination": "/motor/volta-vb4-elektrikli-bisiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vb5",
+      "destination": "/motor/volta-vb5-elektrikli-bisiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vmp1",
+      "destination": "/motor/volta-vmp1-elektrikli-dort-tekerlekli-kamyonet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-ev2",
+      "destination": "/motor/volta-ev2-elektrikli-arac",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-ev1",
+      "destination": "/motor/volta-ev1-elektrikli-arac",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-v1",
+      "destination": "/motor/volta-v1-elektrikli-arac",
+      "permanent": true
+    },
+    {
+      "source": "/motor/atv-pro",
+      "destination": "/motor/volta-revolt-ra5",
+      "permanent": true
+    },
+    {
+      "source": "/motor/revolt-rx5",
+      "destination": "/motor/volta-rx5-benzinli-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/volta-vkx3",
+      "destination": "/motor/volta-vkx3-elektrikli-cocuk-cross-motosiklet",
+      "permanent": true
+    },
+    {
+      "source": "/motor/vkx5-elektrikli-cocuk-arazi-araci",
+      "destination": "/motor/volta-vkx5-elektrikli-cocuk-arazi-araci",
+      "permanent": true
     }
   ]
 }

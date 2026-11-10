@@ -86,7 +86,7 @@
 
 <script setup>
 import { ref, computed, watch, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
 import { useCategoryStore, useSettingsStore } from '../stores/site';
 import { formatPrice } from '../data/seed';
@@ -98,6 +98,7 @@ import { useRecentStore } from '../stores/recent';
 import { trackEvent } from '../lib/analytics';
 
 const route = useRoute();
+const router = useRouter();
 const store = useMotorStore();
 const categoryStore = useCategoryStore();
 const settingsStore = useSettingsStore();
@@ -166,6 +167,12 @@ watch(
   (id) => { if (id) recentStore.track(id); },
   { immediate: true }
 );
+
+// Eski (şablon) adresle gelindiyse okunur adrese geç
+watchEffect(() => {
+  const m = motor.value;
+  if (m && m.url && route.params.slug !== m.url) router.replace(`/motor/${m.url}`);
+});
 
 // Per-motor SEO: title + meta description + Product JSON-LD
 let jsonLdEl = null;

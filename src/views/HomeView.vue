@@ -207,6 +207,6 @@ function countByCategory(slug) {
 
 function openFeaturedCard(m) {
   trackEvent('clickHomeHeroFeaturedCard');
-  router.push(`/motor/${m.slug}`);
+  router.push(`/motor/${m.url || m.slug}`);
 }
 </script>

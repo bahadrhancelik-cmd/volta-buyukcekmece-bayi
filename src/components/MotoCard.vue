@@ -73,7 +73,7 @@ const props = defineProps({
 const router = useRouter();
 function goDetail() {
   trackEvent('clickMotoCard');
-  router.push(`/motor/${props.motor.slug}`);
+  router.push(`/motor/${props.motor.url || props.motor.slug}`);
 }
 
 // İndirim rozeti ve üstü çizili fiyat kapalı: Reklam Yönetmeliği gereği indirimde

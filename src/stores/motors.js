@@ -3,12 +3,14 @@
 import { defineStore } from 'pinia';
 import { supabase, PHOTOS_BUCKET } from '../lib/supabase';
 import { slugify } from '../data/seed';
+import { motorUrl } from '../lib/motorUrl';
 
 // DB <-> app field mapping (DB uses snake_case, app uses camelCase).
 function mapFromDb(row) {
   return {
     id: row.id,
     slug: row.slug,
+    url: motorUrl(row.name, row.slug),
     name: row.name,
     category: row.category,
     price: Number(row.price),
@@ -62,7 +64,7 @@ export const useMotorStore = defineStore('motors', {
 
   getters: {
     sorted: (state) => [...state.motors].sort((a, b) => (a.order ?? 999) - (b.order ?? 999)),
-    bySlug: (state) => (slug) => state.motors.find((m) => m.slug === slug),
+    bySlug: (state) => (slug) => state.motors.find((m) => m.url === slug) || state.motors.find((m) => m.slug === slug),
     byCategory: (state) => (cat) => state.motors.filter((m) => m.category === cat),
     featured: (state) => state.motors.filter((m) => m.featured && m.inStock),
     stats: (state) => ({
