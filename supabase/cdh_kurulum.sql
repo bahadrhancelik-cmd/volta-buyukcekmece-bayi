@@ -157,3 +157,11 @@ insert into storage.buckets (id, name, public) values ('site-assets',  'site-ass
 create policy "site foto yukler"   on storage.objects for insert to authenticated with check (bucket_id in ('motor-photos','site-assets') and (select public.personel_mi()));
 create policy "site foto gunceller" on storage.objects for update to authenticated using (bucket_id in ('motor-photos','site-assets') and (select public.personel_mi()));
 create policy "site foto siler"    on storage.objects for delete to authenticated using (bucket_id in ('motor-photos','site-assets') and (select public.personel_mi()));
+
+-- 10.11.2026 eklemeleri (Supabase'te "site_uygulama_baglantisi" ve "site_gelince_haber_ver" göçleri):
+-- * motors.app_model: site ürünü ↔ uygulama modeli (model_fiyatlari.model).
+-- * site_motor_senkron(): price = güncel (yoksa tavsiye), compare_price = tavsiye (yüksekse, üstü çizili),
+--   in_stock = motorlar'da durum='Stokta' kayıt var mı. model_fiyatlari / motorlar / motors.app_model
+--   değişince tetikleyicilerle çalışır.
+-- * site_haber_ver(p_motor, p_ad, p_telefon): anon çağırabilir; uygulamadaki talepler tablosuna
+--   "İnternet sitesi: stoğa gelince haber verilecek" notuyla kayıt açar (aynı numara+ürün günde 1, saatte 30 sınırı).

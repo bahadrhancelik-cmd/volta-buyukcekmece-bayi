@@ -30,7 +30,7 @@
     <div class="moto-card-image-wrap">
       <MotoImage :motor="motor" className="moto-card-image" />
       <span v-if="motor.featured" class="featured-tag">Öne çıkan</span>
-      <span v-if="onSale" class="sale-tag">İndirim</span>
+      <span v-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
       <StockBadge :in-stock="motor.inStock" />
     </div>
     <div class="moto-card-body">
@@ -76,9 +76,11 @@ function goDetail() {
   router.push(`/motor/${props.motor.url || props.motor.slug}`);
 }
 
-// İndirim rozeti ve üstü çizili fiyat kapalı: Reklam Yönetmeliği gereği indirimde
-// eski fiyat + kampanya tarih aralığı gösterilmeli; sitede tarih alanı yok.
-const onSale = computed(() => false);
+// Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
+const onSale = computed(() => Number(props.motor.comparePrice) > Number(props.motor.price));
+const discountPercent = computed(() =>
+  onSale.value ? Math.round((1 - Number(props.motor.price) / Number(props.motor.comparePrice)) * 100) : 0
+);
 
 const topSpecs = computed(() => {
   const list = Array.isArray(props.motor.specs) ? props.motor.specs : [];

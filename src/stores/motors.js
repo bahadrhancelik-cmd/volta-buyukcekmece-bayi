@@ -24,6 +24,7 @@ function mapFromDb(row) {
     description: row.description ?? '',
     photos: row.images ?? [],
     photoColors: row.photo_colors ?? [],
+    appModel: row.app_model ?? null,
   };
 }
 

@@ -31,12 +31,13 @@
               </label>
               <label class="field">
                 <span>Fiyat (₺)</span>
-                <input type="number" v-model.number="form.price" required min="0" step="100" />
+                <input type="number" v-model.number="form.price" required min="0" step="100" :disabled="!!form.appModel" />
               </label>
               <label class="field">
                 <span>Karşılaştırma fiyatı (₺)</span>
                 <input
                   type="number"
+                  :disabled="!!form.appModel"
                   v-model.number="form.comparePrice"
                   min="0"
                   step="100"
@@ -44,7 +45,10 @@
                 />
               </label>
             </div>
-            <small v-if="hasValidComparePrice" style="color: var(--muted); display: block; margin-top: -4px;">
+            <small v-if="form.appModel" style="color: var(--muted); display: block; margin-top: -4px;">
+              Fiyat, üstü çizili tavsiye fiyatı ve stok durumu CDH Motor uygulamasından otomatik gelir ({{ form.appModel }}). Değiştirmek için uygulamadaki model fiyatını güncelleyin.
+            </small>
+            <small v-else-if="hasValidComparePrice" style="color: var(--muted); display: block; margin-top: -4px;">
               Karşılaştırma fiyatı, mevcut fiyatın üstünde olmalıdır — üzeri çizili olarak gösterilir.
             </small>
             <div class="field">
@@ -166,7 +170,7 @@
                 <span>Yayında (siteye görünür)</span>
               </label>
               <label class="checkbox">
-                <input type="checkbox" v-model="form.inStock" />
+                <input type="checkbox" v-model="form.inStock" :disabled="!!form.appModel" />
                 <span>Stokta var</span>
               </label>
               <label class="checkbox">

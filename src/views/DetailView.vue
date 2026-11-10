@@ -13,7 +13,7 @@
           <MotoCarousel :motor="motor" :photos="filteredPhotos" />
           <div class="detail-image-tags" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
             <span v-if="motor.featured" class="featured-tag">Öne çıkan</span>
-            <span v-if="onSale" class="sale-tag">İndirim</span>
+            <span v-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
           </div>
         </div>
 
@@ -35,7 +35,7 @@
           <div class="detail-price-block">
             <div class="detail-price-label">Bayi fiyatı (KDV dahil)</div>
             <div class="detail-price-row">
-              <span v-if="onSale" class="detail-compare-price">{{ formatPrice(motor.comparePrice) }}</span>
+              <span v-if="onSale" class="detail-compare-price" title="Volta tavsiye satış fiyatı">{{ formatPrice(motor.comparePrice) }}</span>
               <span class="detail-price">{{ formatPrice(motor.price) }}</span>
               <span v-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
             </div>
@@ -63,6 +63,24 @@
                 <span :style="{ background: c }"></span>
               </button>
             </div>
+          </div>
+
+          <div v-if="!motor.inStock" class="notify-box">
+            <template v-if="!notifyDone">
+              <div class="notify-title">Stoğa gelince haber verelim</div>
+              <p class="notify-text">Bu model şu an mağazamızda yok. Adınızı ve telefonunuzu bırakın, gelir gelmez sizi arayalım.</p>
+              <form class="notify-form" @submit.prevent="sendNotify">
+                <input v-model.trim="notifyName" type="text" placeholder="Adınız" autocomplete="name" maxlength="100" required />
+                <input v-model.trim="notifyPhone" type="tel" placeholder="Telefon (05xx…)" autocomplete="tel" maxlength="20" required />
+                <label class="notify-consent">
+                  <input v-model="notifyConsent" type="checkbox" required />
+                  <span>Bilgilerimin bu talep için kullanılmasına ilişkin <RouterLink to="/kvkk" target="_blank">aydınlatma metnini</RouterLink> okudum.</span>
+                </label>
+                <button class="btn btn-primary" type="submit" :disabled="notifySending">{{ notifySending ? 'Gönderiliyor…' : 'Gelince haber ver' }}</button>
+                <div v-if="notifyError" class="notify-error">{{ notifyError }}</div>
+              </form>
+            </template>
+            <div v-else class="notify-ok">Teşekkürler! {{ motor.name }} stoğa girince sizi arayacağız.</div>
           </div>
 
           <div class="detail-cta-row">
@@ -96,6 +114,7 @@ import MotoCard from '../components/MotoCard.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
 import { useRecentStore } from '../stores/recent';
 import { trackEvent } from '../lib/analytics';
+import { supabase } from '../lib/supabase';
 
 const route = useRoute();
 const router = useRouter();
@@ -113,8 +132,8 @@ const related = computed(() => {
     .slice(0, 3);
 });
 
-// İndirim gösterimi kapalı (bkz. MotoCard.vue).
-const onSale = computed(() => false);
+// Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
+const onSale = computed(() => Number(motor.value?.comparePrice) > Number(motor.value?.price));
 
 const discountPercent = computed(() => {
   if (!onSale.value) return 0;
@@ -122,6 +141,26 @@ const discountPercent = computed(() => {
   const p = Number(motor.value.price);
   return Math.round(((cp - p) / cp) * 100);
 });
+
+// "Gelince haber ver" → uygulamadaki Talepler listesine düşer (site_haber_ver).
+const notifyName = ref('');
+const notifyPhone = ref('');
+const notifyConsent = ref(false);
+const notifySending = ref(false);
+const notifyDone = ref(false);
+const notifyError = ref('');
+watch(() => route.params.slug, () => { notifyDone.value = false; notifyError.value = ''; });
+async function sendNotify() {
+  notifyError.value = '';
+  const digits = notifyPhone.value.replace(/\D/g, '');
+  if (digits.length < 10 || digits.length > 13) { notifyError.value = 'Lütfen geçerli bir telefon numarası yazın.'; return; }
+  notifySending.value = true;
+  const { error } = await supabase.rpc('site_haber_ver', { p_motor: motor.value.id, p_ad: notifyName.value, p_telefon: notifyPhone.value });
+  notifySending.value = false;
+  if (error) { notifyError.value = 'Kaydedilemedi, lütfen bizi telefonla arayın.'; return; }
+  notifyDone.value = true;
+  trackEvent('submitNotifyWhenInStock');
+}
 
 const specsList = computed(() => {
   const arr = Array.isArray(motor.value?.specs) ? motor.value.specs : [];
