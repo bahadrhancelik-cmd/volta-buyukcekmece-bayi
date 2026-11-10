@@ -10,7 +10,7 @@
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="eyebrow-dot"></span>
-            Volta Motor Yetkili Bayi · Büyükçekmece
+            Volta Motor · Büyükçekmece Fabrika Satış Mağazası
           </div>
           <h1 class="hero-title">{{ heroTitle }}</h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
@@ -29,7 +29,7 @@
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="eyebrow-dot"></span>
-            Volta Motor Yetkili Bayi · Büyükçekmece
+            Volta Motor · Büyükçekmece Fabrika Satış Mağazası
           </div>
           <h1 class="hero-title" v-html="heroTitleSplit"></h1>
           <p class="hero-lead">{{ heroSubtitle }}</p>
