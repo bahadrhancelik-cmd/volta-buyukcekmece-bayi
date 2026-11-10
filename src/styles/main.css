@@ -2934,3 +2934,8 @@ img { max-width: 100%; display: block; }
 [data-theme="dark"] { --navy: #fafaf9; }
 [data-theme="dark"] .showroom-callout { background: rgba(149,193,31,0.08); border-color: rgba(149,193,31,0.35); }
 [data-theme="dark"] .showroom-icon { background: var(--primary); color: #14212d; }
+
+/* Harita altı Google Haritalar düğmeleri */
+.contact-map{display:flex;flex-direction:column}
+.map-actions{display:flex;flex-wrap:wrap;gap:10px;padding:12px 0 0}
+.map-actions .btn{flex:1 1 180px;justify-content:center;text-align:center}

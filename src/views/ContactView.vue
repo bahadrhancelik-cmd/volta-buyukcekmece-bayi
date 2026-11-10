@@ -50,6 +50,10 @@
             referrerpolicy="no-referrer-when-downgrade"
             :title="`Konum: ${settings.address || 'Volta Motor Büyükçekmece'}`"
           ></iframe>
+          <div v-if="hasMap" class="map-actions">
+            <a :href="YOL_TARIFI" target="_blank" rel="noopener" class="btn btn-primary" @click="trackEvent('clickContactDirections')">Yol tarifi al</a>
+            <a :href="HARITADA_AC" target="_blank" rel="noopener" class="btn btn-ghost">Google Haritalar'da aç</a>
+          </div>
           <div v-else class="map-placeholder">
             <svg viewBox="0 0 600 400" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
               <defs>
@@ -121,6 +125,10 @@
             referrerpolicy="no-referrer-when-downgrade"
             :title="`Konum: ${settings.address || 'Volta Motor Büyükçekmece'}`"
           ></iframe>
+          <div v-if="hasMap" class="map-actions">
+            <a :href="YOL_TARIFI" target="_blank" rel="noopener" class="btn btn-primary" @click="trackEvent('clickContactDirections')">Yol tarifi al</a>
+            <a :href="HARITADA_AC" target="_blank" rel="noopener" class="btn btn-ghost">Google Haritalar'da aç</a>
+          </div>
           <div v-else class="map-placeholder">
             <svg viewBox="0 0 600 400" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
               <defs>
@@ -188,6 +196,7 @@
 </template>
 
 <script setup>
+import { HARITA_GOMULU, YOL_TARIFI, HARITADA_AC } from '../lib/konum';
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useSettingsStore, usePageSectionsStore } from '../stores/site';
 import SectionBlock from '../components/SectionBlock.vue';
@@ -229,9 +238,8 @@ const mapEmbed = computed(() => {
   if (!hasMap.value) return '';
   const lat = Number(settings.value.map_lat);
   const lng = Number(settings.value.map_lng);
-  const d = 0.005;
-  const bbox = `${lng - d}%2C${lat - d}%2C${lng + d}%2C${lat + d}`;
-  return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
+  void lat; void lng;
+  return HARITA_GOMULU;
 });
 
 const hasSocial = computed(() =>

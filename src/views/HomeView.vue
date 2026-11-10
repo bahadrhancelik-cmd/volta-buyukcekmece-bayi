@@ -39,7 +39,7 @@
             </RouterLink>
             <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Mağazayı ziyaret et →</RouterLink>
           </div>
-          <RouterLink to="/iletisim" class="showroom-callout" @click="trackEvent('clickHomeShowroomCallout')">
+          <a :href="YOL_TARIFI" target="_blank" rel="noopener" class="showroom-callout" @click="trackEvent('clickHomeShowroomCallout')">
             <span class="showroom-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
             </span>
@@ -48,7 +48,7 @@
               <span>Tüm modelleri Beykent'teki mağazamızda detaylı inceleyin · Her gün 10:00–19:00</span>
             </span>
             <span class="showroom-go" aria-hidden="true">Yol tarifi →</span>
-          </RouterLink>
+          </a>
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="stat-num">{{ store.motors.length }}</div>
@@ -167,6 +167,7 @@
 </template>
 
 <script setup>
+import { YOL_TARIFI } from '../lib/konum';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
