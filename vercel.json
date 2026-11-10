@@ -2,6 +2,34 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/katalog",
+      "destination": "/api/sayfa?p=katalog"
+    },
+    {
+      "source": "/motor/:slug",
+      "destination": "/api/sayfa?p=motor&slug=:slug"
+    },
+    {
+      "source": "/hakkimizda",
+      "destination": "/api/sayfa?p=hakkimizda"
+    },
+    {
+      "source": "/iletisim",
+      "destination": "/api/sayfa?p=iletisim"
+    },
+    {
+      "source": "/sss",
+      "destination": "/api/sayfa?p=sss"
+    },
+    {
+      "source": "/kvkk",
+      "destination": "/api/sayfa?p=kvkk"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
@@ -17,7 +45,7 @@
       ]
     },
     {
-      "source": "/(robots.txt|sitemap.xml|favicon.svg)",
+      "source": "/(robots.txt|favicon.svg)",
       "headers": [
         {
           "key": "Cache-Control",

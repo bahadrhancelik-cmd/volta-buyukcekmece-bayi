@@ -2965,3 +2965,17 @@ img { max-width: 100%; display: block; }
 .detail-faq .faq-item{border:1px solid var(--border, #e7e5e4);border-radius:14px;padding:14px 18px;margin-top:10px;background:var(--surface, #fff)}
 .detail-faq summary{cursor:pointer;font-weight:600;color:var(--navy)}
 .detail-faq p{margin:10px 0 0;color:var(--muted);line-height:1.6}
+
+/* Google yorumları + yerel metin */
+.reviews-section { padding: 64px 0 24px; }
+.reviews-score { color: #95C11F; white-space: nowrap; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 28px; }
+.review-card { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.review-stars { color: #f5b400; letter-spacing: 2px; font-size: 16px; }
+.review-card blockquote { margin: 0; font-size: 15px; line-height: 1.55; flex: 1; }
+.review-card figcaption { font-weight: 600; font-size: 14px; }
+.review-card figcaption span { color: var(--muted); font-weight: 400; }
+.reviews-more { text-align: center; margin-top: 20px; }
+.local-section { padding: 40px 0 8px; max-width: 860px; }
+.local-section h2 { font-size: 22px; margin: 0 0 12px; }
+.local-section p { color: var(--muted); line-height: 1.7; margin: 0 0 10px; }

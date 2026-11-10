@@ -2,6 +2,8 @@
   <div
     v-if="firstPhoto"
     :class="className"
+    role="img"
+    :aria-label="`Volta ${motor.name || ''}`.trim()"
     :style="{
       backgroundImage: `url(${firstPhoto})`,
       backgroundSize: 'cover',

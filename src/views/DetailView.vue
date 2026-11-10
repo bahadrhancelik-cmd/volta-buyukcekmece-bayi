@@ -234,7 +234,8 @@ watchEffect(() => {
   const m = motor.value;
   if (!m) return;
   const catLabel = categoryStore.labelOf(m.category);
-  document.title = `${m.name} · Volta Motor Büyükçekmece`;
+  const adVolta = /^volta\b/i.test(m.name) ? m.name : `Volta ${m.name}`;
+  document.title = `${adVolta} Fiyatı ve Özellikleri | Volta Büyükçekmece`;
   const specSummary = specsList.value
     .map((s) => `${s.label} ${s.value}${s.unit ? ' ' + s.unit : ''}`)
     .join(', ');

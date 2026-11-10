@@ -5,3 +5,4 @@ const q = encodeURIComponent(YER);
 export const HARITA_GOMULU = `https://www.google.com/maps?q=${q}&output=embed&hl=tr`;
 export const YOL_TARIFI = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
 export const HARITADA_AC = `https://www.google.com/maps/search/?api=1&query=${q}`;
+export const GOOGLE_YORUMLAR = 'https://maps.google.com/?cid=9619022539625125806';

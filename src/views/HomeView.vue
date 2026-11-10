@@ -152,6 +152,31 @@
       </div>
     </section>
 
+    <!-- Google yorumları -->
+    <section class="reviews-section container" aria-labelledby="yorumlar-baslik">
+      <div class="section-head center">
+        <div class="section-eyebrow">Müşterilerimiz ne diyor?</div>
+        <h2 id="yorumlar-baslik" class="section-title">Google'da <span class="reviews-score">4,9 ★</span> · 66 yorum</h2>
+      </div>
+      <div class="reviews-grid">
+        <figure v-for="y in YORUMLAR" :key="y.ad" class="review-card">
+          <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+          <blockquote>{{ y.metin }}</blockquote>
+          <figcaption>{{ y.ad }} <span>· Google yorumu</span></figcaption>
+        </figure>
+      </div>
+      <div class="reviews-more">
+        <a :href="GOOGLE_YORUMLAR" target="_blank" rel="noopener" class="btn btn-ghost" @click="trackEvent('clickGoogleReviews')">Tüm yorumları Google'da gör →</a>
+      </div>
+    </section>
+
+    <!-- Yerel bilgi (SEO) -->
+    <section class="local-section container">
+      <h2>Beykent, Beylikdüzü ve Büyükçekmece'de Volta Motor</h2>
+      <p>Volta Motor Büyükçekmece Fabrika Satış Mağazası, Beykent Pınartepe Mahallesi Avrupa Caddesi'nde hizmet verir. Beylikdüzü, Esenyurt, Büyükçekmece, Avcılar ve Silivri'den gelen müşterilerimize Volta elektrikli motosiklet, elektrikli bisiklet, benzinli motosiklet, ATV ve elektrikli çocuk ürünlerini tek mağazada sunuyoruz.</p>
+      <p>Mağazamızda VSM, VSX, VB2 PRO ve diğer Volta modellerini detaylı inceleyebilir, güncel fiyat ve stok bilgisini alabilir, kredi kartına vade farksız 6 taksit seçeneğinden yararlanabilirsiniz. Tüm ürünler Volta garantisi altındadır.</p>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section container">
       <div class="cta-card">
@@ -167,7 +192,15 @@
 </template>
 
 <script setup>
-import { YOL_TARIFI } from '../lib/konum';
+import { YOL_TARIFI, GOOGLE_YORUMLAR } from '../lib/konum';
+
+// Google Haritalar'daki 5 yıldızlı yorumlardan seçildi (10.11.2026); isimler ad + soyad baş harfi
+const YORUMLAR = [
+  { ad: 'Şebnem A.', metin: 'Her sorumuza detaylı cevap verildi. Müşteri diyaloğu, fiyatlardaki uygunluk çok iyiydi. Hiçbir sorun yaşamadık.' },
+  { ad: 'İlçim G.', metin: 'Personelin ilgi ve alakası çok iyiydi. Hizmetten çok memnun kaldık. Satın alma sürecinde de çok yardımcı oldular. Kesinlikle tavsiye ederim.' },
+  { ad: 'Emrecan A.', metin: 'Hem işinde uzman hem de müşteri ilişkileri çok iyi bir ekibe sahipler. Kesinlikle ilk tercih olmalı.' },
+  { ad: 'Ömer Ç.', metin: 'Mağaza oldukça güzel, ürün çeşitliliği yeterli ve fiyatlar gayet uygun. Çalışanlar güler yüzlü, ilgili ve yardımcı oluyor.' },
+];
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';

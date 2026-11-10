@@ -6,7 +6,7 @@
           <img
             v-if="settings.logo_url"
             :src="settings.logo_url"
-            alt="Logo"
+            alt="Volta Motor Büyükçekmece logosu"
             class="brand-logo-img"
           />
           <template v-else>

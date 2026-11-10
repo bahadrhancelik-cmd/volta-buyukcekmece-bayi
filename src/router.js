@@ -10,7 +10,7 @@ const routes = [
     name: 'home',
     component: () => import('./views/HomeView.vue'),
     meta: {
-      title: `${SITE_NAME} · Elektrikli Scooter, ATV, Bisiklet`,
+      title: 'Volta Motor Büyükçekmece | Beykent Fabrika Satış Mağazası · Elektrikli Motosiklet',
       description: DEFAULT_DESC,
     },
   },
@@ -19,7 +19,7 @@ const routes = [
     name: 'catalog',
     component: () => import('./views/CatalogView.vue'),
     meta: {
-      title: `Model Kataloğu · ${SITE_NAME}`,
+      title: 'Volta Motor Modelleri ve Fiyatları | Volta Büyükçekmece',
       description: 'Tüm Volta Motor modelleri — elektrikli scooter, ATV, elektrikli bisiklet ve daha fazlası. Fiyat ve özelliklere göre filtreleyin.',
     },
   },
@@ -34,7 +34,7 @@ const routes = [
     name: 'about',
     component: () => import('./views/AboutView.vue'),
     meta: {
-      title: `Hakkımızda · ${SITE_NAME}`,
+      title: 'Hakkımızda | Volta Büyükçekmece Fabrika Satış Mağazası',
       description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası olarak elektrikli mobilite çözümlerinde sizi destekliyoruz.',
     },
   },
@@ -43,7 +43,7 @@ const routes = [
     name: 'contact',
     component: () => import('./views/ContactView.vue'),
     meta: {
-      title: `İletişim · ${SITE_NAME}`,
+      title: 'İletişim ve Yol Tarifi | Volta Motor Büyükçekmece Beykent',
       description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası adresi, telefon ve iletişim formu.',
     },
   },
@@ -52,7 +52,7 @@ const routes = [
     name: 'faq',
     component: () => import('./views/FaqView.vue'),
     meta: {
-      title: `Sıkça sorulan sorular · ${SITE_NAME}`,
+      title: `Sıkça Sorulan Sorular | ${SITE_NAME}`,
       description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası — sıkça sorulan sorular ve cevapları. Satış ve garanti hakkında bilgi.',
     },
   },
@@ -61,7 +61,7 @@ const routes = [
     name: 'kvkk',
     component: () => import('./views/KvkkView.vue'),
     meta: {
-      title: `KVKK Aydınlatma Metni · ${SITE_NAME}`,
+      title: `KVKK Aydınlatma Metni | ${SITE_NAME}`,
       description: 'CDH Motor (Volta Motor Büyükçekmece) kişisel verilerin işlenmesine ilişkin aydınlatma metni.',
     },
   },
