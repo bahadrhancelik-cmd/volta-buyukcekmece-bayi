@@ -221,8 +221,8 @@ import { YOL_TARIFI, GOOGLE_YORUMLAR } from '../lib/konum';
 const MAGAZA = [
   { src: '/galeri/magaza-dis-cephe.jpg', alt: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası tabelası ve dış cephesi, Beykent Avrupa Caddesi' },
   { src: '/galeri/magaza-ic.jpg', alt: 'Volta Büyükçekmece showroom içi: elektrikli motosiklet, bisiklet ve üç tekerlekli modeller' },
-  { src: '/galeri/magaza-vitrin.jpg', alt: 'Volta Büyükçekmece mağaza vitrini' },
-  { src: '/galeri/magaza-ic-urunler.jpg', alt: 'Mağazamızda sergilenen Volta modelleri' },
+  { src: '/galeri/magaza-showroom.jpg', alt: 'Showroom koridoru: Volta üç tekerlekli elektrikli araçlar ve motosikletler' },
+  { src: '/galeri/magaza-ev2.jpg', alt: 'Mağazamızın önünde Volta EV2 elektrikli araçlar' },
 ];
 
 // Google Haritalar'daki 5 yıldızlı yorumlardan seçildi (10.11.2026); isimler ad + soyad baş harfi
