@@ -4,25 +4,17 @@ import { defineStore } from 'pinia';
 import { supabase, PHOTOS_BUCKET } from '../lib/supabase';
 import { slugify } from '../data/seed';
 import { motorUrl } from '../lib/motorUrl';
-import { KAMPANYA, kampanyadaMi } from '../lib/kampanya';
 
 // DB <-> app field mapping (DB uses snake_case, app uses camelCase).
 function mapFromDb(row) {
-  const kampanya = kampanyadaMi(row.app_model);
-  const dbPrice = Number(row.price);
-  const dbCompare = row.compare_price == null ? null : Number(row.compare_price);
   return {
     id: row.id,
     slug: row.slug,
     url: motorUrl(row.name, row.slug),
     name: row.name,
     category: row.category,
-    // Kampanyada: fiyat = uygulama fiyatı − indirim, çizili = kampanya öncesi fiyat. Kayıtta dbPrice kullanılır.
-    price: kampanya ? dbPrice - KAMPANYA.indirimTl : dbPrice,
-    comparePrice: kampanya ? dbPrice : dbCompare,
-    kampanya: kampanya ? KAMPANYA.ad : null,
-    dbPrice,
-    dbCompare,
+    price: Number(row.price),
+    comparePrice: row.compare_price == null ? null : Number(row.compare_price),
     specs: Array.isArray(row.specs) ? row.specs : [],
     colors: row.colors ?? [],
     inStock: row.in_stock,
@@ -41,8 +33,8 @@ function mapToDb(m) {
     slug: m.slug,
     name: m.name,
     category: m.category,
-    price: m.kampanya ? m.dbPrice : m.price,
-    compare_price: m.kampanya ? m.dbCompare : m.comparePrice == null || m.comparePrice === '' ? null : Number(m.comparePrice),
+    price: m.price,
+    compare_price: m.comparePrice == null || m.comparePrice === '' ? null : Number(m.comparePrice),
     specs: Array.isArray(m.specs)
       ? m.specs
           .map((s) => ({
