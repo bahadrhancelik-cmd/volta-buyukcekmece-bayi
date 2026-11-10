@@ -152,6 +152,30 @@
       </div>
     </section>
 
+    <!-- Mağaza ve teslimat fotoğrafları (Instagram'dan, 11.11.2026) -->
+    <section class="gallery-section container" aria-labelledby="magaza-baslik">
+      <div class="section-head center">
+        <div class="section-eyebrow">Mağazamız</div>
+        <h2 id="magaza-baslik" class="section-title">Beykent'te, Avrupa Caddesi üzerinde</h2>
+      </div>
+      <div class="store-grid">
+        <img v-for="f in MAGAZA" :key="f.src" :src="f.src" :alt="f.alt" width="800" height="1000" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section class="gallery-section container" aria-labelledby="teslimat-baslik">
+      <div class="section-head center">
+        <div class="section-eyebrow">Teslimatlarımız</div>
+        <h2 id="teslimat-baslik" class="section-title">Yeni araçları hayırlı olsun!</h2>
+      </div>
+      <div class="delivery-grid">
+        <img v-for="n in 12" :key="n" :src="`/galeri/teslimat-${n}.jpg`" :alt="`Volta Motor Büyükçekmece Fabrika Satış Mağazası önünde teslimat ${n}`" width="600" height="750" loading="lazy" decoding="async" />
+      </div>
+      <div class="reviews-more">
+        <a href="https://www.instagram.com/voltamotorbuyukcekmece/" target="_blank" rel="noopener" class="btn btn-ghost" @click="trackEvent('clickInstagramGallery')">Instagram'da daha fazlası →</a>
+      </div>
+    </section>
+
     <!-- Google yorumları -->
     <section class="reviews-section container" aria-labelledby="yorumlar-baslik">
       <div class="section-head center">
@@ -193,6 +217,13 @@
 
 <script setup>
 import { YOL_TARIFI, GOOGLE_YORUMLAR } from '../lib/konum';
+
+const MAGAZA = [
+  { src: '/galeri/magaza-dis-cephe.jpg', alt: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası dış cephesi, Beykent Avrupa Caddesi' },
+  { src: '/galeri/magaza-giris.jpg', alt: 'Volta Büyükçekmece mağaza girişi ve showroom' },
+  { src: '/galeri/magaza-ic-vsm.jpg', alt: 'Mağazamızda Volta VSM elektrikli motosikletler' },
+  { src: '/galeri/magaza-ic-urunler.jpg', alt: 'Volta Büyükçekmece showroom: elektrikli motosiklet ve araçlar' },
+];
 
 // Google Haritalar'daki 5 yıldızlı yorumlardan seçildi (10.11.2026); isimler ad + soyad baş harfi
 const YORUMLAR = [

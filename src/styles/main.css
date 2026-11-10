@@ -2967,7 +2967,7 @@ img { max-width: 100%; display: block; }
 .detail-faq p{margin:10px 0 0;color:var(--muted);line-height:1.6}
 
 /* Google yorumları + yerel metin */
-.reviews-section { padding: 64px 0 24px; }
+.reviews-section { padding-top: 64px; padding-bottom: 24px; }
 .reviews-score { color: #95C11F; white-space: nowrap; }
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 28px; }
 .review-card { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
@@ -2976,6 +2976,16 @@ img { max-width: 100%; display: block; }
 .review-card figcaption { font-weight: 600; font-size: 14px; }
 .review-card figcaption span { color: var(--muted); font-weight: 400; }
 .reviews-more { text-align: center; margin-top: 20px; }
-.local-section { padding: 40px 0 8px; max-width: 860px; }
+.local-section { padding-top: 40px; padding-bottom: 8px; max-width: 860px; }
 .local-section h2 { font-size: 22px; margin: 0 0 12px; }
 .local-section p { color: var(--muted); line-height: 1.7; margin: 0 0 10px; }
+
+/* Mağaza + teslimat galerisi */
+.gallery-section { padding-top: 56px; padding-bottom: 8px; }
+.store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+.delivery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 24px; }
+.store-grid img, .delivery-grid img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; display: block; background: var(--surface-2); }
+@media (max-width: 900px) {
+  .store-grid { grid-template-columns: repeat(2, 1fr); }
+  .delivery-grid { grid-template-columns: repeat(3, 1fr); }
+}
