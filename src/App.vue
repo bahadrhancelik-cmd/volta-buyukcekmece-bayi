@@ -1,5 +1,6 @@
 <template>
   <div>
+    <KampanyaSeridi v-if="!isAdminRoute" />
     <SiteHeader v-if="!isAdminRoute" />
     <RouterView />
     <SiteFooter v-if="!isAdminRoute" />
@@ -10,6 +11,7 @@
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import SiteHeader from './components/SiteHeader.vue';
+import KampanyaSeridi from './components/KampanyaSeridi.vue';
 import SiteFooter from './components/SiteFooter.vue';
 import { useMotorStore } from './stores/motors';
 import { useCategoryStore, useSettingsStore, useFaqStore } from './stores/site';

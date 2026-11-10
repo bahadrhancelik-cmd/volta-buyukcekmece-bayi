@@ -30,7 +30,8 @@
     <div class="moto-card-image-wrap">
       <MotoImage :motor="motor" className="moto-card-image" />
       <span v-if="motor.featured" class="featured-tag">Öne çıkan</span>
-      <span v-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
+      <span v-if="motor.kampanya" class="sale-tag kampanya-tag">11.11 · 1.111 TL indirim</span>
+      <span v-else-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
       <StockBadge :in-stock="motor.inStock" />
     </div>
     <div class="moto-card-body">

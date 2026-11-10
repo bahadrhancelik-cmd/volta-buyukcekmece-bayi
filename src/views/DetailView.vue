@@ -13,7 +13,8 @@
           <MotoCarousel :motor="motor" :photos="filteredPhotos" />
           <div class="detail-image-tags" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
             <span v-if="motor.featured" class="featured-tag">Öne çıkan</span>
-            <span v-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
+            <span v-if="motor.kampanya" class="sale-tag kampanya-tag">11.11 · 1.111 TL indirim</span>
+            <span v-else-if="onSale" class="sale-tag">%{{ discountPercent }} indirim</span>
           </div>
         </div>
 
@@ -33,11 +34,14 @@
           ></div>
 
           <div class="detail-price-block">
-            <div class="detail-price-label">Bayi fiyatı (KDV dahil)</div>
+            <div class="detail-price-label">{{ motor.kampanya ? '11.11 fiyatı · yalnız 11 Kasım 2026 (vergiler dahil)' : 'Satış fiyatı (vergiler dahil)' }}</div>
             <div class="detail-price-row">
-              <span v-if="onSale" class="detail-compare-price" title="Volta tavsiye satış fiyatı">{{ formatPrice(motor.comparePrice) }}</span>
+              <span v-if="onSale" class="detail-compare-price" :title="motor.kampanya ? 'Kampanya öncesi fiyat' : 'Volta tavsiye satış fiyatı'">{{ formatPrice(motor.comparePrice) }}</span>
               <span class="detail-price">{{ formatPrice(motor.price) }}</span>
-              <span v-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
+              <span v-if="motor.kampanya" class="detail-discount-badge">1.111 TL indirim</span>
+              <span v-else-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
+            </div>
+            <div v-if="hediye" class="kampanya-hediye">🎁 {{ KAMPANYA.hediye.metin }}
             </div>
           </div>
 
@@ -103,6 +107,7 @@
 </template>
 
 <script setup>
+import { KAMPANYA, hediyeVarMi } from '../lib/kampanya';
 import { ref, computed, watch, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMotorStore } from '../stores/motors';
@@ -133,6 +138,7 @@ const related = computed(() => {
 });
 
 // Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
+const hediye = computed(() => hediyeVarMi(motor.value?.appModel));
 const onSale = computed(() => Number(motor.value?.comparePrice) > Number(motor.value?.price));
 
 const discountPercent = computed(() => {

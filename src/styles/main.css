@@ -2934,3 +2934,10 @@ img { max-width: 100%; display: block; }
 [data-theme="dark"] { --navy: #fafaf9; }
 [data-theme="dark"] .showroom-callout { background: rgba(149,193,31,0.08); border-color: rgba(149,193,31,0.35); }
 [data-theme="dark"] .showroom-icon { background: var(--primary); color: #14212d; }
+
+/* 11.11 kampanya (src/lib/kampanya.js) */
+.kampanya-serit{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;align-items:center;padding:10px 16px;background:#95C11F;color:#14212D;text-decoration:none;font-size:14px;text-align:center;line-height:1.35}
+.kampanya-serit strong{font-weight:800}
+.kampanya-serit em{font-style:normal;font-weight:700;text-decoration:underline}
+.sale-tag.kampanya-tag{background:#95C11F;color:#14212D}
+.kampanya-hediye{margin-top:10px;display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(149,193,31,.15);color:var(--navy);font-weight:600;font-size:14px}
