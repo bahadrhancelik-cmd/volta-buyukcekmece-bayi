@@ -42,7 +42,8 @@
 <li><b>Yazılım, e-posta ve bulut hizmeti sağlayıcılarımız:</b> stok, satış ve müşteri kayıtlarımızı tuttuğumuz yazılım ile e-posta ve belge saklama hizmetlerinin sunucularında. Bu sunucuların bir kısmı Avrupa Birliği başta olmak üzere yurt dışında bulunmaktadır.</li>
 </ul>
 <h2>4. Verilerinizi nasıl topluyoruz?</h2>
-<p>Verileriniz; mağazada sözlü veya yazılı olarak, telefon, WhatsApp, e-posta, sosyal medya ve ilan siteleri üzerinden sizin tarafınızdan iletilmesiyle; fatura, teklif ve teslim tutanağı gibi belgelerin düzenlenmesiyle ve mağaza içi güvenlik kameralarıyla kısmen otomatik, kısmen otomatik olmayan yollarla toplanır.</p>
+<p>Verileriniz; mağazada sözlü veya yazılı olarak, telefon, WhatsApp, e-posta, sosyal medya ve ilan siteleri ile internet sitemizdeki iletişim ve “gelince haber ver” formları üzerinden sizin tarafınızdan iletilmesiyle; fatura, teklif ve teslim tutanağı gibi belgelerin düzenlenmesiyle ve mağaza içi güvenlik kameralarıyla kısmen otomatik, kısmen otomatik olmayan yollarla toplanır.</p>
+<p>İnternet sitemizi ziyaret ettiğinizde, reklamlarımızın etkisini ölçmek amacıyla Google Ads etiketi (Google LLC) aracılığıyla tarayıcınıza çerez yerleştirilebilir ve ziyaret bilgileriniz (IP adresi, tarayıcı ve cihaz bilgisi, sitede yapılan tıklamalar) Google sunucularına, dolayısıyla yurt dışına aktarılabilir. Çerezleri tarayıcınızın ayarlarından silebilir veya engelleyebilirsiniz.</p>
 <h2>5. Verilerinizi ne kadar süre saklıyoruz?</h2>
 <ul>
 <li>Fatura, ticari defter ve satışa ilişkin belgeler: ticaret ve vergi mevzuatının öngördüğü süre boyunca (genellikle 10 yıl).</li>

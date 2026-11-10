@@ -4,7 +4,7 @@
       <RouterLink to="/" class="brand" @click="trackEvent('clickHeaderLogo')">
         <img src="/logo-volta.png" alt="Volta" class="brand-logo-img" width="640" height="266" />
         <span class="brand-lockup">
-          <span class="brand-city">BÜYÜKÇEKMECE</span>
+          <span class="brand-city"><img src="/buyukcekmece-yazi.png" alt="Büyükçekmece" class="brand-city-img brand-city-acik" width="1309" height="96" /><img src="/buyukcekmece-yazi-beyaz.png" alt="" aria-hidden="true" class="brand-city-img brand-city-koyu" width="1309" height="96" /></span>
           <span class="brand-city-sub">Fabrika Satış Mağazası</span>
         </span>
       </RouterLink>

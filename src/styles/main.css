@@ -2939,3 +2939,12 @@ img { max-width: 100%; display: block; }
 .contact-map{display:flex;flex-direction:column}
 .map-actions{display:flex;flex-wrap:wrap;gap:10px;padding:12px 0 0}
 .map-actions .btn{flex:1 1 180px;justify-content:center;text-align:center}
+
+/* Logo yanındaki BÜYÜKÇEKMECE: Volta'nın özgün harfleri (marka/ logosundan kesildi) */
+.brand-city { display: block; line-height: 0; }
+.brand-city-img { height: 15px; width: auto; display: block; }
+.brand-city-koyu { display: none; }
+[data-theme="dark"] .brand-city-acik { display: none; }
+[data-theme="dark"] .brand-city-koyu { display: block; }
+.brand-city-sub { margin-top: 6px; }
+@media (max-width: 640px) { .brand-city-img { height: 12px; } .brand-city-sub { margin-top: 5px; } }
