@@ -1,11 +1,11 @@
-// Thin wrapper around the Testerify widget loaded in index.html.
-// The script is deferred and can be blocked by the browser, so every
-// call is guarded. Admin pages (/admin, /admin-login) are never tracked.
+// Site içi tıklama olayları Google etiketine (gtag / Tag Manager) gönderilir.
+// Etiket engellenmiş olabilir; her çağrı korumalı. Admin sayfaları izlenmez.
 export function trackEvent(name) {
   if (typeof window === 'undefined') return;
   if (window.location.pathname.startsWith('/admin')) return;
   try {
-    window.testerify?.customEvent?.(name);
+    if (typeof window.gtag === 'function') window.gtag('event', name);
+    else if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: name });
   } catch {
     // Analytics must never break the UI.
   }
