@@ -44,7 +44,7 @@ const routes = [
     component: () => import('./views/ContactView.vue'),
     meta: {
       title: `İletişim · ${SITE_NAME}`,
-      description: 'Volta Motor Büyükçekmece bayi adresi, telefon ve iletişim formu.',
+      description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası adresi, telefon ve iletişim formu.',
     },
   },
   {
