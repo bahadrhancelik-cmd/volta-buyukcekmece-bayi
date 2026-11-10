@@ -148,7 +148,7 @@
         <div>
           <h2>Showroom'umuzu ziyaret edin.</h2>
           <p v-if="settings.address">{{ settings.address }}<span v-if="settings.working_hours"> · {{ settings.working_hours }}</span></p>
-          <p v-else>Atatürk Caddesi No: 123, Büyükçekmece. Hafta içi 09:00–19:00, Cumartesi 10:00–18:00.</p>
+          <p v-else>Pınartepe Mah. Avrupa Cd. No:83T, Beykent, Büyükçekmece. Her gün 10:00–19:00.</p>
         </div>
         <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeShowroomContactCta')">Konum ve iletişim →</RouterLink>
       </div>
