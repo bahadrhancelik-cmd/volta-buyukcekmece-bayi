@@ -1,7 +1,11 @@
 <template>
   <div>
     <SiteHeader v-if="!isAdminRoute" />
-    <RouterView />
+    <RouterView v-slot="{ Component, route: r }">
+      <Transition name="sayfa-gecis">
+        <component :is="Component" :key="r.path.startsWith('/admin') ? 'admin' : r.path" />
+      </Transition>
+    </RouterView>
     <SiteFooter v-if="!isAdminRoute" />
     <WhatsAppButton v-if="!isAdminRoute" />
   </div>

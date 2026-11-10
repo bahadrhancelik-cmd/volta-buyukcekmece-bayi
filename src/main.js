@@ -4,6 +4,7 @@ import App from './App.vue';
 import router from './router';
 import { useAuthStore } from './stores/motors';
 import './styles/main.css';
+import { belirmeBaslat } from './lib/belirme';
 
 // Site güncellendikten sonra eski açık sekmede yeni sayfaya geçilince eski dosyalar bulunamaz
 // ve sayfa açılmaz. Bu durumda sayfayı bir kez yenileyip güncel sürümü yükle (döngüye girmesin diye 30 sn sınırı).
@@ -33,6 +34,7 @@ async function bootstrap() {
   await auth.init();
   app.use(router);
   app.mount('#app');
+  belirmeBaslat();
 }
 
 bootstrap();
