@@ -19,7 +19,7 @@
       <form @submit.prevent="save" class="admin-form">
         <label class="field">
           <span>Soru</span>
-          <input type="text" v-model="form.question" required placeholder="Örn: Test sürüşü yapabilir miyim?" />
+          <input type="text" v-model="form.question" required placeholder="Örn: Garanti süresi ne kadar?" />
         </label>
         <label class="field">
           <span>Cevap</span>

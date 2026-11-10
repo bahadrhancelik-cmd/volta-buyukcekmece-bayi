@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /admin-login
 
-Sitemap: https://volta-buyukcekmece.com.tr/sitemap.xml
+Sitemap: https://www.voltamotorbuyukcekmece.com/sitemap.xml

@@ -125,8 +125,8 @@
           </div>
           <div class="why-card">
             <div class="why-num">02</div>
-            <h3>Test sürüşü imkânı</h3>
-            <p>Karar vermeden önce showroom'umuzda dilediğiniz modeli denemenizi öneririz. Randevuyla.</p>
+            <h3>Modelleri yakından inceleyin</h3>
+            <p>Karar vermeden önce mağazamızda tüm modelleri detaylı inceleyin; sorularınızı birebir yanıtlayalım.</p>
           </div>
           <div class="why-card">
             <div class="why-num">03</div>
