@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from './stores/motors';
 
 const SITE_NAME = 'Volta Motor Büyükçekmece';
-const DEFAULT_DESC = 'Volta Motor Büyükçekmece yetkili bayi. Elektrikli scooter, ATV ve elektrikli bisiklet modelleri, fiyatlar ve özellikler.';
+const DEFAULT_DESC = 'Volta Motor Büyükçekmece Fabrika Satış Mağazası. Elektrikli scooter, motosiklet, ATV ve elektrikli bisiklet modelleri, güncel fiyatlar ve özellikler.';
 
 const routes = [
   {
@@ -35,7 +35,7 @@ const routes = [
     component: () => import('./views/AboutView.vue'),
     meta: {
       title: `Hakkımızda · ${SITE_NAME}`,
-      description: 'Volta Motor Büyükçekmece bayisi olarak elektrikli mobilite çözümlerinde sizi destekliyoruz.',
+      description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası olarak elektrikli mobilite çözümlerinde sizi destekliyoruz.',
     },
   },
   {

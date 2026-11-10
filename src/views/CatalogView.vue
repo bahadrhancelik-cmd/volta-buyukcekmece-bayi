@@ -5,7 +5,7 @@
         <div class="section-eyebrow">Tüm modeller</div>
         <h1 class="page-title">Model kataloğu</h1>
         <p class="page-lead">
-          Elektrikli scooter, ATV ve e-bisiklet modellerimiz. Bayi fiyatları KDV dahildir.
+          Elektrikli scooter, ATV ve e-bisiklet modellerimiz. Fiyatlara vergiler dahildir.
         </p>
       </div>
     </section>
@@ -94,6 +94,7 @@ const filtered = computed(() => {
   else if (sort.value === 'name-asc') list.sort((a, b) => a.name.localeCompare(b.name, 'tr'));
   else list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
-  return list;
+  // Stoktakiler her sıralamada önce; stokta olmayanlar sonda ("Gelince haber ver" ile).
+  return [...list.filter((m) => m.inStock), ...list.filter((m) => !m.inStock)];
 });
 </script>

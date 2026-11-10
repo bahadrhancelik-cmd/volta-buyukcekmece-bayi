@@ -84,7 +84,7 @@
           </div>
 
           <div class="detail-cta-row">
-            <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Bayiden bilgi al</RouterLink>
+            <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Mağazadan bilgi al</RouterLink>
             <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
           </div>
         </div>

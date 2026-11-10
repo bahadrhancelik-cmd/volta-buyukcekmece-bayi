@@ -18,7 +18,7 @@
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
             </RouterLink>
-            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Bayiyi ziyaret et →</RouterLink>
+            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Mağazayı ziyaret et →</RouterLink>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
             <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
             </RouterLink>
-            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Bayiyi ziyaret et →</RouterLink>
+            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Mağazayı ziyaret et →</RouterLink>
           </div>
           <RouterLink to="/iletisim" class="showroom-callout" @click="trackEvent('clickHomeShowroomCallout')">
             <span class="showroom-icon" aria-hidden="true">
@@ -130,7 +130,7 @@
         <div class="why-grid">
           <div class="why-card">
             <div class="why-num">01</div>
-            <h3>Yetkili bayi</h3>
+            <h3>Fabrika Satış Mağazası</h3>
             <p>Volta Motor'un Büyükçekmece'deki resmi satış noktası, Fabrika Satış Mağazasıyız. Tüm modeller orijinal garantili.</p>
           </div>
           <div class="why-card">
@@ -189,7 +189,7 @@ const hasHeroImage = computed(() => !!settings.value.hero_image_url);
 const heroTitle = computed(() => settings.value.hero_title || 'Şehir senin, enerji bizden.');
 const heroSubtitle = computed(() =>
   settings.value.hero_subtitle ||
-  "Türkiye'nin elektrikli mobilite markası Volta Motor'un Büyükçekmece bayisinde scooter, ATV ve elektrikli bisiklet modellerimizi keşfedin."
+  "Volta Motor Büyükçekmece Fabrika Satış Mağazası'nda scooter, ATV ve elektrikli bisiklet modellerimizi keşfedin."
 );
 
 // For the split-hero (no banner image), break the title at the first comma

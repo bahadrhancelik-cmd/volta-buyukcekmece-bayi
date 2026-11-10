@@ -17,7 +17,7 @@
       <ColorDots :colors="motor.colors" />
     </div>
     <div class="moto-card-price-wrap">
-      <div class="moto-card-price-label">Bayi fiyatı</div>
+      <div class="moto-card-price-label">Satış fiyatı</div>
       <div class="moto-card-price-stack">
         <span v-if="onSale" class="moto-card-compare">{{ formatPrice(motor.comparePrice) }}</span>
         <span class="moto-card-price">{{ formatPrice(motor.price) }}</span>

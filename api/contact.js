@@ -8,7 +8,7 @@
 //   SUPABASE_URL       — enables the audit log; falls back to VITE_SUPABASE_URL
 //   SUPABASE_ANON_KEY  — falls back to VITE_SUPABASE_ANON_KEY
 
-const DEFAULT_FROM = 'Volta Bayi <onboarding@resend.dev>';
+const DEFAULT_FROM = 'Volta Büyükçekmece Site <onboarding@resend.dev>';
 const DEFAULT_TO = 'cdhmotorluaraclar@gmail.com';
 
 function escapeHtml(s) {
