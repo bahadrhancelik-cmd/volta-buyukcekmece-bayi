@@ -131,7 +131,7 @@
           <div class="why-card">
             <div class="why-num">01</div>
             <h3>Yetkili bayi</h3>
-            <p>Volta Motor'un Büyükçekmece'deki resmi satış ve servis noktasıyız. Tüm modeller orijinal garantili.</p>
+            <p>Volta Motor'un Büyükçekmece'deki resmi satış noktası, Fabrika Satış Mağazasıyız. Tüm modeller orijinal garantili.</p>
           </div>
           <div class="why-card">
             <div class="why-num">02</div>
@@ -140,8 +140,8 @@
           </div>
           <div class="why-card">
             <div class="why-num">03</div>
-            <h3>Servis & yedek parça</h3>
-            <p>Periyodik bakım, batarya kontrolü, yedek parça temini — hepsi tek noktadan.</p>
+            <h3>Garanti & satış sonrası</h3>
+            <p>Tüm ürünler Volta garantisinde. Bakım ve servis ihtiyacınızda sizi Volta yetkili servisine yönlendiriyoruz.</p>
           </div>
           <div class="why-card">
             <div class="why-num">04</div>

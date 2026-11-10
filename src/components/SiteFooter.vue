@@ -22,7 +22,7 @@
           </template>
         </div>
         <p class="footer-copy">
-          Volta Motor yetkili satış ve servis bayisi. Şehir içi ulaşımdan arazi kullanımına,
+          Volta Motor Büyükçekmece Fabrika Satış Mağazası. Şehir içi ulaşımdan arazi kullanımına,
           ihtiyacınıza uygun elektrikli aracı keşfedin.
         </p>
       </div>

@@ -53,7 +53,7 @@ const routes = [
     component: () => import('./views/FaqView.vue'),
     meta: {
       title: `Sıkça sorulan sorular · ${SITE_NAME}`,
-      description: 'Volta Motor Büyükçekmece bayisi — sıkça sorulan sorular ve cevapları. Satış, servis ve garanti hakkında bilgi.',
+      description: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası — sıkça sorulan sorular ve cevapları. Satış ve garanti hakkında bilgi.',
     },
   },
   {
