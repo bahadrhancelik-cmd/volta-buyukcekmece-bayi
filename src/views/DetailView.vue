@@ -33,7 +33,7 @@
           ></div>
 
           <div class="detail-price-block">
-            <div class="detail-price-label">Bayi fiyatı (KDV dahil)</div>
+            <div class="detail-price-label">Satış fiyatı (vergiler dahil)</div>
             <div class="detail-price-row">
               <span v-if="onSale" class="detail-compare-price" title="Volta tavsiye satış fiyatı">{{ formatPrice(motor.comparePrice) }}</span>
               <span class="detail-price">{{ formatPrice(motor.price) }}</span>
