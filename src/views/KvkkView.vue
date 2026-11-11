@@ -44,6 +44,14 @@
 <h2>4. Verilerinizi nasıl topluyoruz?</h2>
 <p>Verileriniz; mağazada sözlü veya yazılı olarak, telefon, WhatsApp, e-posta, sosyal medya ve ilan siteleri ile internet sitemizdeki iletişim ve “gelince haber ver” formları üzerinden sizin tarafınızdan iletilmesiyle; fatura, teklif ve teslim tutanağı gibi belgelerin düzenlenmesiyle ve mağaza içi güvenlik kameralarıyla kısmen otomatik, kısmen otomatik olmayan yollarla toplanır.</p>
 <p>İnternet sitemizde, <b>yalnızca sitede çıkan çerez şeridinde “Kabul et” seçeneğini işaretlemeniz hâlinde</b> (açık rızanız), sitenin nasıl kullanıldığını anlamak ve reklamlarımızın etkisini ölçmek amacıyla Google Analytics ve Google Ads (Google LLC) çerezleri tarayıcınıza yerleştirilir. Bu çerezler aracılığıyla ziyaretinize ilişkin bilgiler (kısaltılmış IP adresi, tarayıcı ve cihaz bilgisi, siteye nereden geldiğiniz, görüntülenen sayfalar, sitede kalma süresi ve yapılan tıklamalar) toplanır ve Google sunucularına, dolayısıyla yurt dışına aktarılabilir. Rızanız olmadan bu çerezler kullanılmaz; sitenin çalışması için zorunlu olmayan hiçbir çerez yerleştirilmez. Tercihinizi dilediğiniz zaman sitemizin alt kısmındaki “Çerez tercihleri” bağlantısından değiştirebilir, çerezleri tarayıcınızın ayarlarından silebilir veya engelleyebilirsiniz.</p>
+<p><b>Sitemizde kullanılan çerezler:</b></p>
+<table><tr><th>Çerez</th><th>Sağlayıcı</th><th>Amacı</th><th>Süresi</th></tr>
+<tr><td>_ga</td><td>Google Analytics</td><td>Ziyaretçileri birbirinden ayırarak site trafiğini ölçmek</td><td>2 yıl</td></tr>
+<tr><td>_ga_B2KDYJ4JRL</td><td>Google Analytics</td><td>Ziyaret oturumunu ve sayfa görüntülemelerini saymak</td><td>2 yıl</td></tr>
+<tr><td>_gcl_au</td><td>Google Ads</td><td>Reklamlarımızın siteye getirdiği ziyaretleri ölçmek</td><td>90 gün</td></tr>
+<tr><td>_gcl_aw</td><td>Google Ads</td><td>Siteye bir Google reklamına tıklayarak gelindiğinde, o tıklamayı kaydetmek</td><td>90 gün</td></tr>
+</table>
+<p>Bu çerezlerin tamamı isteğe bağlıdır ve yalnızca onayınızla yerleştirilir. Çerez şeridindeki seçiminiz (kabul veya ret) ise tekrar sorulmaması için çerez olarak değil, tarayıcınızın yerel hafızasında (“cerezOnay” kaydı) saklanır; bu kayıt bize veya üçüncü kişilere gönderilmez.</p>
 <h2>5. Verilerinizi ne kadar süre saklıyoruz?</h2>
 <ul>
 <li>Fatura, ticari defter ve satışa ilişkin belgeler: ticaret ve vergi mevzuatının öngördüğü süre boyunca (genellikle 10 yıl).</li>
