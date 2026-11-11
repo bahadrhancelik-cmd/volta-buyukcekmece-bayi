@@ -3082,3 +3082,15 @@ img { max-width: 100%; display: block; }
   .vitrin-kart, .vitrin-kart.vitrin-buyuk { aspect-ratio: 16 / 10; }
   .vitrin-buyuk .vitrin-ad { font-size: 24px; }
 }
+
+/* Çerez onay şeridi (src/components/CerezOnay.vue) */
+.cerez-seridi { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 60; max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: #14212D; color: #fff; border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,.25); font-size: 13.5px; line-height: 1.45; }
+.cerez-seridi p { margin: 0; flex: 1; }
+.cerez-seridi a { color: #95C11F; text-decoration: underline; }
+.cerez-butonlar { display: flex; gap: 8px; flex-shrink: 0; }
+.cerez-butonlar button { border: 0; border-radius: 999px; padding: 9px 16px; font: inherit; font-weight: 700; cursor: pointer; }
+.cerez-red { background: rgba(255,255,255,.12); color: #fff; }
+.cerez-kabul { background: #95C11F; color: #14212D; }
+.footer-cerez { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; opacity: .85; }
+.footer-cerez:hover { opacity: 1; text-decoration: underline; }
+@media (max-width: 600px) { .cerez-seridi { flex-direction: column; align-items: stretch; bottom: 84px; } .cerez-butonlar button { flex: 1; } }

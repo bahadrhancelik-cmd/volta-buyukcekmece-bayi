@@ -10,8 +10,12 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Çerez onayı (KVKK): ziyaretçi "Kabul et" demeden analiz/reklam çerezi yazılmaz.
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+    try { if (localStorage.getItem('cerezOnay') === 'kabul') gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'denied' }); } catch (e) {}
     gtag('js', new Date());
     gtag('config', 'AW-18356226072');
+    gtag('config', 'G-B2KDYJ4JRL');
   </script>
 
   <title>Volta Motor Büyükçekmece | Beykent Fabrika Satış Mağazası · Elektrikli Motosiklet</title>

@@ -9,6 +9,7 @@
     </RouterView>
     <SiteFooter v-if="!isAdminRoute" />
     <WhatsAppButton v-if="!isAdminRoute" />
+    <CerezOnay v-if="!isAdminRoute" />
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import SiteHeader from './components/SiteHeader.vue';
 import DuyuruSeridi from './components/DuyuruSeridi.vue';
 import SiteFooter from './components/SiteFooter.vue';
 import WhatsAppButton from './components/WhatsAppButton.vue';
+import CerezOnay from './components/CerezOnay.vue';
 import { useMotorStore } from './stores/motors';
 import { useCategoryStore, useSettingsStore, useFaqStore } from './stores/site';
 

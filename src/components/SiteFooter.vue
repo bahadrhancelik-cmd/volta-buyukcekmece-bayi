@@ -36,6 +36,7 @@
           <RouterLink to="/sss" @click="trackEvent('clickFooterNavFaq')">SSS</RouterLink>
           <RouterLink to="/iletisim" @click="trackEvent('clickFooterNavContact')">İletişim</RouterLink>
           <RouterLink to="/kvkk">KVKK Aydınlatma Metni</RouterLink>
+          <button type="button" class="footer-cerez" @click="cerezTercihi">Çerez tercihleri</button>
         </div>
         <div v-if="categoryStore.sorted.length">
           <h4>Kategoriler</h4>
@@ -62,6 +63,7 @@
 </template>
 
 <script setup>
+function cerezTercihi() { window.dispatchEvent(new Event('cerez-tercihi-ac')); }
 import { computed } from 'vue';
 import { useSettingsStore, useCategoryStore } from '../stores/site';
 import { trackEvent } from '../lib/analytics';
