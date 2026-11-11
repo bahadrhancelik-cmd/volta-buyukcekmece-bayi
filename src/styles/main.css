@@ -3062,3 +3062,23 @@ img { max-width: 100%; display: block; }
 .moto-card.grid { display: flex; flex-direction: column; }
 .moto-card.grid .moto-card-body { flex: 1; display: flex; flex-direction: column; }
 .kart-alt { margin-top: auto; }
+
+/* Ana sayfa model vitrini */
+.vitrin-section { padding-top: 56px; padding-bottom: 8px; }
+.vitrin-section .section-title { margin-bottom: 20px; }
+.vitrin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.vitrin-kart { position: relative; display: block; border-radius: var(--radius-lg, 18px); overflow: hidden; aspect-ratio: 4 / 3; background: #14212D; color: #fff; text-decoration: none; }
+.vitrin-kart.vitrin-buyuk { grid-column: 1 / -1; aspect-ratio: 5 / 2; }
+.vitrin-kart img { width: 100%; height: 100%; object-fit: cover; object-position: var(--vitrin-odak, 50% 50%); transition: transform .5s ease; }
+.vitrin-kart:hover img { transform: scale(1.04); }
+.vitrin-kart::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(20,33,45,.85) 100%); pointer-events: none; }
+.vitrin-yazi { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; display: flex; flex-direction: column; gap: 4px; }
+.vitrin-ad { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.vitrin-buyuk .vitrin-ad { font-size: 32px; }
+.vitrin-alt { font-size: 14px; opacity: .9; }
+.vitrin-incele { margin-top: 6px; font-size: 13px; font-weight: 700; color: #95C11F; }
+@media (max-width: 900px) {
+  .vitrin-grid { grid-template-columns: 1fr; gap: 12px; }
+  .vitrin-kart, .vitrin-kart.vitrin-buyuk { aspect-ratio: 16 / 10; }
+  .vitrin-buyuk .vitrin-ad { font-size: 24px; }
+}

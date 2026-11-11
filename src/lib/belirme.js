@@ -2,7 +2,7 @@
 // Hafif tutuldu (tek IntersectionObserver, yalnız opacity/transform); hareket azaltmayı
 // seçen kullanıcıda ve eski tarayıcıda hiç çalışmaz, içerik hep görünür kalır.
 const SECICI = [
-  '.cat-card', '.moto-card', '.why-card',
+  '.cat-card', '.vitrin-kart', '.moto-card', '.why-card',
   '.store-grid img', '.delivery-grid', '.review-card', '.reviews-more',
   '.local-section', '.cta-section', '.value-card', '.faq-item', '.contact-card',
 ].join(',');

@@ -133,6 +133,21 @@
     <RecentlyViewed :limit="4" />
 
     <!-- Neden biz -->
+    <!-- Model vitrini (görseller: Volta Motor) -->
+    <section class="vitrin-section container" aria-labelledby="vitrin-baslik">
+      <h2 id="vitrin-baslik" class="section-title">Mağazamızda sizi bekliyor</h2>
+      <div class="vitrin-grid">
+        <RouterLink v-for="(v, i) in VITRIN" :key="v.url" :to="`/motor/${v.url}`" class="vitrin-kart" :class="{ 'vitrin-buyuk': i === 0 }" :style="{ '--vitrin-odak': v.odak }" @click="trackEvent('clickHomeVitrin')">
+          <img :src="v.src" :alt="v.alt" loading="lazy" />
+          <span class="vitrin-yazi">
+            <span class="vitrin-ad">{{ v.ad }}</span>
+            <span class="vitrin-alt">{{ v.metin }}</span>
+            <span class="vitrin-incele">İncele →</span>
+          </span>
+        </RouterLink>
+      </div>
+    </section>
+
     <section class="why-section">
       <div class="container">
         <div class="section-head center">
@@ -254,6 +269,14 @@ import { trackEvent } from '../lib/analytics';
 import MotoCard from '../components/MotoCard.vue';
 import MotoImage from '../components/MotoImage.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
+
+// Ana sayfa model vitrini: görseller Volta Motor'un resmi sitesinden (bayi olarak kullanıyoruz)
+const VITRIN = [
+  { url: 'volta-vsm-elektrikli-motosiklet', src: '/galeri/vitrin-vsm.jpg', ad: 'Volta VSM', metin: 'Şehirde pratik ve ekonomik ulaşım', odak: '50% 60%', alt: 'Volta VSM elektrikli motosiklet şehirde' },
+  { url: 'volta-demon-gr250r-benzinli-motosiklet', src: '/galeri/vitrin-gr250r.jpg', ad: 'Demon GR250R', metin: 'Sportif tasarım, 250 cc güç', odak: '78% 50%', alt: 'Volta Demon GR250R benzinli motosiklet' },
+  { url: 'volta-vmp1-elektrikli-dort-tekerlekli-kamyonet', src: '/galeri/vitrin-vmp1.jpg', ad: 'Volta VMP1', metin: 'İşinizi taşıyan elektrikli kamyonet', odak: '78% 60%', alt: 'Volta VMP1 elektrikli kamyonet' },
+  { url: 'volta-apt4-uc-tekerlekli-elektrikli-motosiklet', src: '/galeri/vitrin-apt4.jpg', ad: 'Volta APT4', metin: 'Yükte ve yolda güçlü üç teker', odak: '75% 55%', alt: 'Volta APT4 üç tekerlekli elektrikli motosiklet' },
+];
 
 const router = useRouter();
 const store = useMotorStore();
