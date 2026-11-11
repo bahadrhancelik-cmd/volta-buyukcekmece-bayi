@@ -3049,3 +3049,16 @@ img { max-width: 100%; display: block; }
   .duyuru-liste { flex-wrap: wrap; justify-content: center; }
   .duyuru-liste[aria-hidden="true"] { display: none; }
 }
+
+/* Model kartı alt kısmı: renk, fiyat, taksit alt alta (12.11.2026) */
+.kart-renkler { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+.kart-renkler .color-dots { margin: 0; }
+.kart-fiyat { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.kart-eski-fiyat { font-size: 14px; color: var(--muted); text-decoration: line-through; white-space: nowrap; }
+.kart-yeni-fiyat { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy, #14212D); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.kart-taksit { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; padding: 7px 12px; border-radius: 999px; background: rgba(149, 193, 31, 0.16); color: #3d5208; font-size: 13px; line-height: 1.2; }
+.kart-taksit strong { font-weight: 700; white-space: nowrap; }
+.kart-taksit svg { flex-shrink: 0; color: #5b7a0f; }
+.moto-card.grid { display: flex; flex-direction: column; }
+.moto-card.grid .moto-card-body { flex: 1; display: flex; flex-direction: column; }
+.kart-alt { margin-top: auto; }

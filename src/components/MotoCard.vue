@@ -43,13 +43,19 @@
           <span><strong>{{ s.value }}</strong>{{ s.unit ? ' ' + s.unit : '' }}</span>
         </template>
       </div>
-      <div class="moto-card-bottom">
-        <ColorDots :colors="motor.colors" />
-        <div class="moto-card-price-stack inline">
-          <span v-if="onSale" class="moto-card-compare">{{ formatPrice(motor.comparePrice) }}</span>
-          <span class="moto-card-price">{{ formatPrice(motor.price) }}</span>
-          <span class="moto-card-taksit">{{ taksit }} taksit</span>
-        </div>
+      <div class="kart-alt">
+      <div v-if="renkSayisi" class="kart-renkler">
+        <ColorDots :colors="motor.colors" :size="16" />
+        <span>{{ renkSayisi }} renk</span>
+      </div>
+      <div class="kart-fiyat">
+        <span v-if="onSale" class="kart-eski-fiyat">{{ formatPrice(motor.comparePrice) }}</span>
+        <span class="kart-yeni-fiyat">{{ formatPrice(motor.price) }}</span>
+      </div>
+      <div v-if="taksit" class="kart-taksit">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <span><strong>{{ taksit }}</strong> · vade farksız</span>
+      </div>
       </div>
     </div>
   </article>
@@ -81,6 +87,7 @@ function goDetail() {
 
 // Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
 const taksit = computed(() => taksitMetni(props.motor.price));
+const renkSayisi = computed(() => (Array.isArray(props.motor.colors) ? props.motor.colors.length : 0));
 const onSale = computed(() => Number(props.motor.comparePrice) > Number(props.motor.price));
 const discountPercent = computed(() =>
   onSale.value ? Math.round((1 - Number(props.motor.price) / Number(props.motor.comparePrice)) * 100) : 0
