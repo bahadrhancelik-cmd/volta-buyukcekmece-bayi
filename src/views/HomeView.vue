@@ -225,7 +225,7 @@
     <!-- Yerel bilgi (SEO) -->
     <section class="local-section container">
       <h2>Beykent, Beylikdüzü ve Büyükçekmece'de Volta Motor</h2>
-      <p>Volta Motor Büyükçekmece Fabrika Satış Mağazası, Beykent Pınartepe Mahallesi Avrupa Caddesi'nde hizmet verir. Beylikdüzü, Esenyurt, Büyükçekmece, Avcılar ve Silivri'den gelen müşterilerimize Volta elektrikli motosiklet, elektrikli bisiklet, benzinli motosiklet, ATV ve elektrikli çocuk ürünlerini tek mağazada sunuyoruz.</p>
+      <p>Volta Motor Büyükçekmece Fabrika Satış Mağazası, Beykent Pınartepe Mahallesi Avrupa Caddesi'nde hizmet verir. Beylikdüzü, Esenyurt, Büyükçekmece, Avcılar, Küçükçekmece, Bakırköy, Bağcılar ve Silivri'den gelen müşterilerimize Volta elektrikli motosiklet, elektrikli bisiklet, benzinli motosiklet, ATV ve elektrikli çocuk ürünlerini tek mağazada sunuyoruz.</p>
       <p>Mağazamızda VSM, VSX, VB2 PRO ve diğer Volta modellerini detaylı inceleyebilir, güncel fiyat ve stok bilgisini alabilir, kredi kartına vade farksız 6 taksit seçeneğinden yararlanabilirsiniz. Tüm ürünler Volta garantisi altındadır.</p>
     </section>
 

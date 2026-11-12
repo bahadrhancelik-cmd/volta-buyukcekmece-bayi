@@ -29,7 +29,7 @@ const SABIT = {
     baslik: `Hakkımızda | Volta Büyükçekmece Fabrika Satış Mağazası`,
     aciklama: 'Volta Motor Büyükçekmece Fabrika Satış Mağazası: Beykent\'te Volta elektrikli motosiklet, bisiklet, ATV ve benzinli motosiklet satışı. 1000+ mutlu müşteri.',
     h1: 'Hakkımızda',
-    govde: '<p>Volta Motor Büyükçekmece Fabrika Satış Mağazası, Beykent Pınartepe Mahallesi Avrupa Caddesi No:83T adresinde Volta Motor ürünlerinin satışını yapar. Beylikdüzü, Esenyurt, Büyükçekmece, Avcılar ve Silivri\'den müşterilerimize hizmet veriyoruz.</p>',
+    govde: '<p>Volta Motor Büyükçekmece Fabrika Satış Mağazası, Beykent Pınartepe Mahallesi Avrupa Caddesi No:83T adresinde Volta Motor ürünlerinin satışını yapar. Beylikdüzü, Esenyurt, Büyükçekmece, Avcılar, Küçükçekmece, Bakırköy, Bağcılar ve Silivri\'den müşterilerimize hizmet veriyoruz.</p>',
   },
   iletisim: {
     baslik: `İletişim ve Yol Tarifi | Volta Motor Büyükçekmece Beykent`,
