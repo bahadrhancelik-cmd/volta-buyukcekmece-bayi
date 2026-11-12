@@ -3094,3 +3094,41 @@ img { max-width: 100%; display: block; }
 .footer-cerez { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; opacity: .85; }
 .footer-cerez:hover { opacity: 1; text-decoration: underline; }
 @media (max-width: 600px) { .cerez-seridi { flex-direction: column; align-items: stretch; bottom: 84px; } .cerez-butonlar button { flex: 1; } }
+
+/* Açılış sahnesi (13.11.2026): mağazamızın gerçek iç fotoğrafı, tam genişlik, koyu perde */
+.hero-sahne { position: relative; overflow: hidden; background: #0d1720; color: #fff; padding: 0; min-height: min(680px, 86vh); display: flex; align-items: center; }
+.sahne-foto, .sahne-foto img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sahne-foto img { object-fit: cover; object-position: 60% 55%; transform: scale(1.04); animation: sahneYaklas 14s ease-out forwards; }
+@keyframes sahneYaklas { from { transform: scale(1.1); } to { transform: scale(1.02); } }
+.sahne-perde { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(13,23,32,.94) 0%, rgba(13,23,32,.82) 34%, rgba(13,23,32,.35) 62%, rgba(13,23,32,.08) 100%),
+  linear-gradient(0deg, rgba(13,23,32,.55) 0%, rgba(13,23,32,0) 30%); }
+.sahne-ic { position: relative; z-index: 1; width: 100%; padding-top: 72px; padding-bottom: 72px; }
+.sahne-metin { max-width: 600px; }
+.sahne-ust { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .02em; color: rgba(255,255,255,.88); padding: 7px 14px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(255,255,255,.06); backdrop-filter: blur(6px); margin-bottom: 22px; }
+.sahne-nokta { width: 8px; height: 8px; border-radius: 50%; background: #95C11F; box-shadow: 0 0 0 4px rgba(149,193,31,.25); }
+.sahne-baslik { font-size: clamp(40px, 6vw, 72px); line-height: 1.02; letter-spacing: -.035em; font-weight: 800; margin: 0 0 18px; color: #fff; }
+.sahne-baslik .hero-accent { color: #95C11F; }
+.sahne-alt { font-size: 18px; line-height: 1.55; color: rgba(255,255,255,.82); margin: 0 0 22px; max-width: 520px; }
+.hero-sahne .hero-taksit { background: rgba(13,23,32,.72); backdrop-filter: blur(8px); box-shadow: 0 12px 32px rgba(0,0,0,.35), 0 0 0 2px #95C11F; }
+.sahne-dugmeler { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+.hero-sahne .sahne-ana { background: #95C11F; color: #14212D; border-color: #95C11F; font-weight: 700; }
+.hero-sahne .sahne-ana:hover { background: #a8d42a; border-color: #a8d42a; }
+.sahne-ikinci { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+.sahne-ikinci:hover { background: rgba(255,255,255,.16); color: #fff; }
+.sahne-guven { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: 14px; color: rgba(255,255,255,.75); }
+.sahne-guven li { position: relative; padding-left: 16px; }
+.sahne-guven li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: #95C11F; }
+.sahne-guven strong { color: #fff; font-weight: 700; }
+@media (max-width: 760px) {
+  .hero-sahne { display: block; min-height: 0; }
+  .sahne-foto { position: relative; display: block; height: 280px; overflow: hidden; }
+  .sahne-foto img { object-position: 50% 62%; }
+  .sahne-perde { bottom: auto; height: 280px; background: linear-gradient(180deg, rgba(13,23,32,0) 45%, rgba(13,23,32,.7) 80%, #0d1720 100%); }
+  .sahne-ic { padding-top: 0; padding-bottom: 36px; margin-top: -56px; }
+  .sahne-ust { font-size: 11.5px; margin-bottom: 14px; }
+  .sahne-alt { font-size: 16px; }
+  .sahne-dugmeler .btn { flex: 1 1 auto; justify-content: center; }
+  .sahne-guven { gap: 8px 18px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .sahne-foto img { animation: none; transform: none; } }

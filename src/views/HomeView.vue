@@ -30,70 +30,36 @@
       </div>
     </section>
 
-    <section v-else class="hero hero-split">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <div class="hero-eyebrow">
-            <span class="eyebrow-dot"></span>
-            Volta Motor · Büyükçekmece Fabrika Satış Mağazası
+    <section v-else class="hero hero-sahne">
+      <picture class="sahne-foto" aria-hidden="true">
+        <img src="/galeri/hero-magaza-yatay.jpg" alt="" fetchpriority="high" decoding="async" />
+      </picture>
+      <div class="sahne-perde" aria-hidden="true"></div>
+      <div class="container sahne-ic">
+        <div class="sahne-metin">
+          <div class="sahne-ust">
+            <span class="sahne-nokta"></span>
+            Volta Fabrika Satış Mağazası · Beykent
           </div>
-          <h1 class="hero-title" v-html="heroTitleSplit"></h1>
-          <p class="hero-lead">{{ heroSubtitle }}</p>
+          <h1 class="sahne-baslik" v-html="heroTitleSplit"></h1>
+          <p class="sahne-alt">{{ heroSubtitle }}</p>
           <div class="hero-taksit">
             <span class="hero-taksit-ikon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             </span>
             <span class="hero-taksit-metin"><strong>Vade farksız 6&nbsp;taksit</strong><small>Kredi kartına, ek ücret olmadan</small></span>
           </div>
-          <div class="hero-ctas">
-            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg" @click="trackEvent('clickHomeHeroPrimaryCta')">
+          <div class="sahne-dugmeler">
+            <RouterLink :to="settings.hero_cta_href || '/katalog'" class="btn btn-primary btn-lg sahne-ana" @click="trackEvent('clickHomeHeroPrimaryCta')">
               {{ settings.hero_cta_label || 'Tüm modelleri gör' }}
             </RouterLink>
-            <RouterLink to="/iletisim" class="btn btn-ghost btn-lg" @click="trackEvent('clickHomeHeroVisitDealerCta')">Mağazayı ziyaret et →</RouterLink>
+            <a :href="YOL_TARIFI" target="_blank" rel="noopener" class="btn btn-lg sahne-ikinci" @click="trackEvent('clickHomeShowroomCallout')">Yol tarifi al →</a>
           </div>
-          <a :href="YOL_TARIFI" target="_blank" rel="noopener" class="showroom-callout" @click="trackEvent('clickHomeShowroomCallout')">
-            <span class="showroom-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            </span>
-            <span class="showroom-text">
-              <strong>Showroom'da görün, yerinde karar verin</strong>
-              <span>Tüm modelleri Beykent'teki mağazamızda detaylı inceleyin · Her gün 10:00'dan itibaren açığız</span>
-            </span>
-            <span class="showroom-go" aria-hidden="true">Yol tarifi →</span>
-          </a>
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <div class="stat-num">{{ store.motors.length }}</div>
-              <div class="stat-label">Modelimiz</div>
-            </div>
-            <div class="hero-stat">
-              <div class="stat-num">1000+</div>
-              <div class="stat-label">Mutlu müşteri</div>
-            </div>
-            <div class="hero-stat">
-              <div class="stat-num">2 yıl</div>
-              <div class="stat-label">Garanti</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="hero-card-stack">
-            <div
-              v-for="(m, i) in featured.slice(0, 3)"
-              :key="m.id"
-              class="hero-stack-card"
-              :class="`stack-${i}`"
-              @click="openFeaturedCard(m)"
-            >
-              <MotoImage :motor="m" className="hero-stack-image" />
-              <div class="hero-stack-meta">
-                <div class="hero-stack-name">{{ m.name }}</div>
-                <div class="hero-stack-price">{{ formatPrice(m.price) }}</div>
-              </div>
-            </div>
-            <div class="hero-bg-circle"></div>
-          </div>
+          <ul class="sahne-guven">
+            <li><strong>{{ store.motors.length }}</strong> model tek mağazada</li>
+            <li><strong>2 yıl</strong> Volta garantisi</li>
+            <li><strong>Her gün</strong> 10:00'dan itibaren açık</li>
+          </ul>
         </div>
       </div>
     </section>
