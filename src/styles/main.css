@@ -792,7 +792,7 @@ img { max-width: 100%; display: block; }
 }
 .color-pick.active { border-color: var(--ink); }
 
-.detail-cta-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.detail-cta-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
 
 .related .section-title { margin-bottom: 24px; font-size: 28px; }
 

@@ -26,12 +26,6 @@
             <span v-if="motor.featured" class="meta-tag">★ Öne çıkan</span>
           </div>
 
-          <div
-            v-if="motor.description"
-            class="detail-desc rich-content"
-            v-html="motor.description"
-          ></div>
-
           <div class="detail-price-block">
             <div class="detail-price-label">Satış fiyatı (vergiler dahil)</div>
             <div class="detail-price-row">
@@ -40,6 +34,30 @@
               <span v-if="onSale" class="detail-discount-badge">%{{ discountPercent }} indirim</span>
             </div>
             <div class="detail-taksit">veya <strong>{{ taksit }}</strong> · kredi kartına vade farksız taksit</div>
+          </div>
+
+          <div v-if="!motor.inStock" class="notify-box">
+            <template v-if="!notifyDone">
+              <div class="notify-title">Stoğa gelince haber verelim</div>
+              <p class="notify-text">Bu model şu an mağazamızda yok. Adınızı ve telefonunuzu bırakın, gelir gelmez sizi arayalım.</p>
+              <form class="notify-form" @submit.prevent="sendNotify">
+                <input v-model.trim="notifyName" type="text" placeholder="Adınız" autocomplete="name" maxlength="100" required />
+                <input v-model.trim="notifyPhone" type="tel" placeholder="Telefon (05xx…)" autocomplete="tel" maxlength="20" required />
+                <label class="notify-consent">
+                  <input v-model="notifyConsent" type="checkbox" required />
+                  <span>Bilgilerimin bu talep için kullanılmasına ilişkin <RouterLink to="/kvkk" target="_blank">aydınlatma metnini</RouterLink> okudum.</span>
+                </label>
+                <button class="btn btn-primary" type="submit" :disabled="notifySending">{{ notifySending ? 'Gönderiliyor…' : 'Gelince haber ver' }}</button>
+                <div v-if="notifyError" class="notify-error">{{ notifyError }}</div>
+              </form>
+            </template>
+            <div v-else class="notify-ok">Teşekkürler! {{ motor.name }} stoğa girince sizi arayacağız.</div>
+          </div>
+
+          <div class="detail-cta-row">
+            <a :href="waLink" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" @click="trackEvent('clickDetailWhatsappCta')">WhatsApp'tan sor</a>
+            <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Mağazadan bilgi al</RouterLink>
+            <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
           </div>
 
           <div v-if="specsList.length" class="detail-specs">
@@ -66,29 +84,12 @@
             </div>
           </div>
 
-          <div v-if="!motor.inStock" class="notify-box">
-            <template v-if="!notifyDone">
-              <div class="notify-title">Stoğa gelince haber verelim</div>
-              <p class="notify-text">Bu model şu an mağazamızda yok. Adınızı ve telefonunuzu bırakın, gelir gelmez sizi arayalım.</p>
-              <form class="notify-form" @submit.prevent="sendNotify">
-                <input v-model.trim="notifyName" type="text" placeholder="Adınız" autocomplete="name" maxlength="100" required />
-                <input v-model.trim="notifyPhone" type="tel" placeholder="Telefon (05xx…)" autocomplete="tel" maxlength="20" required />
-                <label class="notify-consent">
-                  <input v-model="notifyConsent" type="checkbox" required />
-                  <span>Bilgilerimin bu talep için kullanılmasına ilişkin <RouterLink to="/kvkk" target="_blank">aydınlatma metnini</RouterLink> okudum.</span>
-                </label>
-                <button class="btn btn-primary" type="submit" :disabled="notifySending">{{ notifySending ? 'Gönderiliyor…' : 'Gelince haber ver' }}</button>
-                <div v-if="notifyError" class="notify-error">{{ notifyError }}</div>
-              </form>
-            </template>
-            <div v-else class="notify-ok">Teşekkürler! {{ motor.name }} stoğa girince sizi arayacağız.</div>
-          </div>
+          <div
+            v-if="motor.description"
+            class="detail-desc rich-content"
+            v-html="motor.description"
+          ></div>
 
-          <div class="detail-cta-row">
-            <a :href="waLink" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" @click="trackEvent('clickDetailWhatsappCta')">WhatsApp'tan sor</a>
-            <RouterLink to="/iletisim" class="btn btn-primary btn-lg" @click="trackEvent('clickDetailRequestInfoCta')">Mağazadan bilgi al</RouterLink>
-            <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
-          </div>
         </div>
       </div>
 
