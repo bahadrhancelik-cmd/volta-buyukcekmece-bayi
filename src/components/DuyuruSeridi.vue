@@ -12,6 +12,7 @@
 <script setup>
 const MADDELER = [
   'Kredi kartına vade farksız 6 taksit',
+  'Stoktaki modellerde aynı gün teslim imkânı',
   'Tüm modelleri mağazada yerinde inceleyin',
   "Her gün 10:00'dan itibaren açığız",
   'Tüm ürünler 2 yıl Volta garantili',

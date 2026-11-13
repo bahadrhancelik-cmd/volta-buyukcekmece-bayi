@@ -58,7 +58,7 @@
           <ul class="sahne-guven">
             <li><strong>{{ store.motors.length }}</strong> model tek mağazada</li>
             <li><strong>2 yıl</strong> Volta garantisi</li>
-            <li><strong>Her gün</strong> 10:00'dan itibaren açık</li>
+            <li><strong>Aynı gün</strong> teslim imkânı (stoktaki modeller)</li>
           </ul>
         </div>
       </div>
