@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.3",
-    "@tiptap/extension-link": "^3.23.1",
-    "@tiptap/starter-kit": "^3.23.1",
-    "@tiptap/vue-3": "^3.23.1",
+    "@tiptap/extension-link": "^3.33.1",
+    "@tiptap/starter-kit": "^3.33.1",
+    "@tiptap/vue-3": "^3.33.1",
     "pinia": "^2.2.6",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
