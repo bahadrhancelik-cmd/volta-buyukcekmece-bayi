@@ -3093,7 +3093,7 @@ img { max-width: 100%; display: block; }
 .cerez-kabul { background: #95C11F; color: #14212D; }
 .footer-cerez { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; opacity: .85; }
 .footer-cerez:hover { opacity: 1; text-decoration: underline; }
-@media (max-width: 600px) { .cerez-seridi { flex-direction: column; align-items: stretch; bottom: 84px; } .cerez-butonlar button { flex: 1; } }
+@media (max-width: 600px) { .cerez-seridi { flex-direction: column; align-items: stretch; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 70; } .cerez-butonlar button { flex: 1; } }
 
 /* Açılış sahnesi (13.11.2026): mağazamızın gerçek iç fotoğrafı, tam genişlik, koyu perde */
 .hero-sahne { position: relative; overflow: hidden; background: #0d1720; color: #fff; padding: 0; min-height: min(680px, 86vh); display: flex; align-items: center; }
