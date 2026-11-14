@@ -56,6 +56,16 @@
   ],
   "redirects": [
     {
+      "source": "/volta",
+      "destination": "/katalog",
+      "permanent": true
+    },
+    {
+      "source": "/volta/:path*",
+      "destination": "/katalog",
+      "permanent": true
+    },
+    {
       "source": "/motor/lit",
       "destination": "/motor/volta-vsm-elektrikli-motosiklet",
       "permanent": true
