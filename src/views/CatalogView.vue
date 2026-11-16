@@ -5,7 +5,7 @@
         <div class="section-eyebrow">Tüm modeller</div>
         <h1 class="page-title">Model kataloğu</h1>
         <p class="page-lead">
-          Elektrikli scooter, ATV ve e-bisiklet modellerimiz. Fiyatlara vergiler dahildir.
+          Elektrikli ve benzinli motosiklet, ticari araç, bisiklet ve çocuk modellerimiz. Fiyatlara vergiler dahildir.
         </p>
       </div>
     </section>
