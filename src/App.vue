@@ -25,7 +25,8 @@ import { useMotorStore } from './stores/motors';
 import { useCategoryStore, useSettingsStore, useFaqStore } from './stores/site';
 
 const route = useRoute();
-const isAdminRoute = computed(() => route.path.startsWith('/admin'));
+// /panel de site başlığı, WhatsApp düğmesi ve çerez uyarısı olmadan açılır.
+const isAdminRoute = computed(() => route.path.startsWith('/admin') || route.path.startsWith('/panel'));
 const motorStore = useMotorStore();
 const categoryStore = useCategoryStore();
 const settingsStore = useSettingsStore();

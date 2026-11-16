@@ -19,7 +19,7 @@ const OLAY_DONUSUM = {
 
 export function trackEvent(name) {
   if (typeof window === 'undefined') return;
-  if (window.location.pathname.startsWith('/admin')) return;
+  if (/^\/(admin|panel)/.test(window.location.pathname)) return;
   try {
     if (typeof window.gtag === 'function') {
       window.gtag('event', name);

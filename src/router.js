@@ -82,6 +82,13 @@ const routes = [
     ],
   },
   {
+    // CDH Motor web paneli: iPhone uygulamasının tarayıcı sürümü (yalnız görüntüleme, 16.11.2026)
+    path: '/panel',
+    name: 'panel',
+    component: () => import('./views/panel/PanelView.vue'),
+    meta: { title: 'CDH Motor Paneli', robots: 'noindex, nofollow' },
+  },
+  {
     path: '/admin-login',
     name: 'admin-login',
     component: () => import('./views/admin/AdminLoginView.vue'),
