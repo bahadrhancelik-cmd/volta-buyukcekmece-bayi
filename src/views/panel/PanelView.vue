@@ -395,7 +395,8 @@ function ayHesabi(ay) {
 const karAylari = computed(() => {
   const liste = [];
   const d = new Date(bugun.getFullYear(), bugun.getMonth(), 1);
-  for (let i = 0; i < 12; i += 1) {
+  // Uygulama kayıtları Ekim 2026'da başladı; öncesi boş görünmesin.
+  for (let i = 0; i < 24 && d >= new Date(2026, 9, 1); i += 1) {
     liste.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
     d.setMonth(d.getMonth() - 1);
   }
