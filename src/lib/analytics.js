@@ -30,3 +30,9 @@ export function trackEvent(name) {
     // Analytics must never break the UI.
   }
 }
+
+// Katalog araması (16.11.2026): GA4'ün önerilen "search" olayı, aranan kelimeyle.
+export function trackSearch(terim) {
+  if (typeof window === 'undefined' || !terim) return;
+  try { if (typeof window.gtag === 'function') window.gtag('event', 'search', { search_term: terim }); } catch { /* yok say */ }
+}
