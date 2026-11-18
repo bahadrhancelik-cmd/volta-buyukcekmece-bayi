@@ -82,6 +82,9 @@
       </RouterLink>
     </section>
 
+    <!-- Hangi model bana uygun? (18.11.2026) -->
+    <ModelSecici />
+
     <!-- Öne çıkanlar -->
     <section v-if="featured.length" class="featured-section container">
       <div class="section-head">
@@ -235,6 +238,7 @@ import { trackEvent } from '../lib/analytics';
 import MotoCard from '../components/MotoCard.vue';
 import MotoImage from '../components/MotoImage.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
+import ModelSecici from '../components/ModelSecici.vue';
 
 // Ana sayfa model vitrini: görseller Volta Motor'un resmi sitesinden (bayi olarak kullanıyoruz)
 const VITRIN = [

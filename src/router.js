@@ -104,7 +104,11 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior() { return { top: 0 }; },
+  scrollBehavior(to) {
+    // "/#model-secici" gibi bağlantılar sayfa çizildikten sonra ilgili bölüme kaydırır
+    if (to.hash) return new Promise((r) => setTimeout(() => r({ el: to.hash, top: 80, behavior: 'smooth' }), 350));
+    return { top: 0 };
+  },
 });
 
 // Admin guard — waits for Supabase session bootstrap (idempotent).

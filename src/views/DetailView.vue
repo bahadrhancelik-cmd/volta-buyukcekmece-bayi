@@ -93,6 +93,8 @@
         </div>
       </div>
 
+      <KarsilastirmaTablosu :motor="motor" />
+
       <section v-if="sss.length" class="detail-faq">
         <h2 class="section-title">{{ motor.name }} hakkında sık sorulanlar</h2>
         <details v-for="(q, i) in sss" :key="i" class="faq-item" :open="i === 0">
@@ -124,6 +126,7 @@ import MotoCarousel from '../components/MotoCarousel.vue';
 import StockBadge from '../components/StockBadge.vue';
 import MotoCard from '../components/MotoCard.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
+import KarsilastirmaTablosu from '../components/KarsilastirmaTablosu.vue';
 import { useRecentStore } from '../stores/recent';
 import { trackEvent } from '../lib/analytics';
 import { supabase } from '../lib/supabase';

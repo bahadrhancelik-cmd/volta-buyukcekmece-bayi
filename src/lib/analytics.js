@@ -10,6 +10,7 @@ const DONUSUM = {
 const OLAY_DONUSUM = {
   clickWhatsappFloat: 'whatsapp',
   clickDetailWhatsappCta: 'whatsapp',
+  clickQuizWhatsapp: 'whatsapp',
   clickHeaderPhone: 'telefon',
   clickContactPhoneLink: 'telefon',
   clickDetailCallDealerCta: 'telefon',

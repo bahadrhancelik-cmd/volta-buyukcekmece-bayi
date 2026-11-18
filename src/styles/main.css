@@ -3165,3 +3165,7 @@ img { max-width: 100%; display: block; }
   .sahne-guven { gap: 8px 18px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .sahne-foto img { animation: none; transform: none; } }
+
+/* Katalogdan "Hangi model bana uygun?" testine bağlantı (18.11.2026) */
+.katalog-test { display: inline-block; margin-top: 10px; font-weight: 600; color: var(--primary-dark); text-decoration: none; }
+.katalog-test:hover { text-decoration: underline; }

@@ -7,6 +7,7 @@
         <p class="page-lead">
           Elektrikli ve benzinli motosiklet, ticari araç, bisiklet ve çocuk modellerimiz. Fiyatlara vergiler dahildir.
         </p>
+        <RouterLink to="/#model-secici" class="katalog-test" @click="trackEvent('clickCatalogQuizLink')">Kararsız mısınız? 4 soruda size uygun modeli bulalım →</RouterLink>
       </div>
     </section>
 
