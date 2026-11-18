@@ -8,8 +8,13 @@ export function whatsappLink(metin) {
   return `https://wa.me/${WHATSAPP_NO}?text=${encodeURIComponent(metin)}`;
 }
 
-export function urunWhatsappMetni(ad) {
-  return `Merhaba, ${ad} hakkında bilgi almak istiyorum. (voltamotorbuyukcekmece.com)`;
+// Ürün sayfası adresi mesaja eklenir: WhatsApp onu fotoğraflı önizleme kartına çevirir,
+// çalışan hangi modelin sorulduğunu ve fiyatını mesajda görür (18.11.2026).
+export function urunWhatsappMetni(ad, url) {
+  const adres = url ? `https://www.voltamotorbuyukcekmece.com/motor/${url}` : 'voltamotorbuyukcekmece.com';
+  return url
+    ? `Merhaba, ${ad} hakkında bilgi almak istiyorum.\n${adres}`
+    : `Merhaba, ${ad} hakkında bilgi almak istiyorum. (${adres})`;
 }
 
 const tl = (n) => new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(n);

@@ -149,7 +149,7 @@ const related = computed(() => {
 
 // Üstü çizili fiyat = Volta tavsiye fiyatı (uygulamadan otomatik gelir).
 const taksit = computed(() => taksitMetni(motor.value?.price));
-const waLink = computed(() => whatsappLink(urunWhatsappMetni(motor.value?.name || '')));
+const waLink = computed(() => whatsappLink(urunWhatsappMetni(motor.value?.name || '', motor.value?.url)));
 const sss = computed(() => (motor.value ? urunSSS(motor.value) : []));
 const onSale = computed(() => Number(motor.value?.comparePrice) > Number(motor.value?.price));
 
