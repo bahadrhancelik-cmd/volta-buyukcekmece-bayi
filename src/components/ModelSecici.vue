@@ -114,6 +114,11 @@ const BUTCE = {
     { d: 'b2', baslik: '300 – 450 bin TL', min: 300000, max: 450000 },
     { d: 'b3', baslik: '450 bin TL ve üstü', min: 450000, max: Infinity },
   ],
+  ogrenci: [
+    { d: 'b1', baslik: "30 bin TL'ye kadar", min: 0, max: 30000 },
+    { d: 'b2', baslik: '30 – 45 bin TL', min: 30000, max: 45000 },
+    { d: 'b3', baslik: '45 bin TL ve üstü', min: 45000, max: Infinity },
+  ],
   cocuk: [
     { d: 'b1', baslik: "30 bin TL'ye kadar", min: 0, max: 30000 },
     { d: 'b2', baslik: 'Fark etmez', min: 0, max: Infinity },
@@ -128,6 +133,7 @@ const S_KULLANIM = {
     { d: 'yuk', baslik: 'İş için', alt: 'Yük, sipariş ya da pazar malı taşımak' },
     { d: 'uc', baslik: 'Rahat sürüş', alt: 'Dengede durması kolay, üç tekerli bir araç' },
     { d: 'kabin', baslik: 'Kapalı araç', alt: 'Yağmurda, soğukta ıslanmadan gitmek' },
+    { d: 'ogrenci', baslik: 'Öğrenci için', alt: 'Okula, kursa gidip gelmek; uygun bütçeli' },
     { d: 'cocuk', baslik: 'Çocuğum için', alt: 'Çocuk motosikleti ya da arazi aracı' },
   ],
 };
@@ -153,7 +159,7 @@ const S_YAKIT = {
 const sorular = computed(() => {
   const k = cevap.kullanim;
   const liste = [S_KULLANIM];
-  if (k === 'sehir' || k === 'uc' || k === 'yuk') liste.push(S_MESAFE);
+  if (k === 'sehir' || k === 'uc' || k === 'yuk' || k === 'ogrenci') liste.push(S_MESAFE);
   if (k === 'sehir') liste.push(S_YAKIT);
   liste.push({
     id: 'butce',
@@ -203,6 +209,8 @@ function uygunTurler() {
     case 'uc': return ['uc-teker', 'yuk'];
     case 'kabin': return ['kabinli'];
     case 'cocuk': return ['cocuk'];
+    // Öğrenci: elektrikli iki teker ve bisiklet (VSM, VSX, VS1, VB2 PRO…); benzinli yok
+    case 'ogrenci': return ['iki-teker-elektrikli', 'bisiklet'];
     default: {
       if (cevap.yakit === 'benzin') return ['benzinli'];
       const t = ['iki-teker-elektrikli', 'bisiklet'];
