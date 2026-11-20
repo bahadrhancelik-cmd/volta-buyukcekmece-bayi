@@ -164,7 +164,7 @@ const sorular = computed(() => {
   liste.push({
     id: 'butce',
     metin: 'Ne kadarlık bir bütçe düşünüyorsunuz?',
-    not: 'Kredi kartına 6 aya kadar vade farksız taksit yapılabiliyor.',
+    not: 'Kredi kartına vade farksız 6 taksit yapılabiliyor.',
     secenekler: BUTCE[k || 'sehir'],
   });
   return liste;

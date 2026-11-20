@@ -50,7 +50,7 @@ export function urunSSS(m, kategoriEtiketi) {
     if (sarj) p.push(`şarj süresi ${sarj}`);
     liste.push({ s: `${ad} menzili ve şarj süresi ne kadar?`, c: `Üretici verilerine göre ${p.join(', ')}. Gerçek değerler yük, hız ve hava koşullarına göre değişir.` });
   }
-  liste.push({ s: `${ad} taksitle alınabilir mi?`, c: `Evet. Kredi kartına ${TAKSIT_SAYISI} aya varan vade farksız taksit yapılır; fiyata vergiler dahildir.` });
+  liste.push({ s: `${ad} taksitle alınabilir mi?`, c: `Evet. Kredi kartına vade farksız ${TAKSIT_SAYISI} taksit yapılır; fiyata vergiler dahildir.` });
   liste.push({ s: `${ad} mağazada var mı, görebilir miyim?`, c: m.inStock
     ? `Evet, şu an stokta. Beykent'teki mağazamızda Pazartesi–Cumartesi 10:00–19:00, Pazar 10:00–18:00 arası detaylı inceleyebilirsiniz.`
     : `Şu an stokta yok. Sayfadaki "Gelince haber ver" formunu doldurursanız stoğa girdiğinde sizi ararız; benzer modelleri mağazamızda inceleyebilirsiniz.` });
