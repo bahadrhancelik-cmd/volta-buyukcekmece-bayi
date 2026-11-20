@@ -7,12 +7,16 @@
         <div class="ozk-etiket">{{ s.label }}</div>
       </div>
     </div>
+    <div v-if="elektrikli" class="ozk-rozet">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v5M15 2v5"/><path d="M6 7h12v4a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></svg>
+      <span><b>Normal prizden şarj edilir</b></span>
+    </div>
     <div v-if="digerleri.length" class="ozk-kucuk">
-      <div v-for="(s, i) in digerleri" :key="'k' + i" class="ozk-satir">
+      <div v-for="(s, i) in digerleri" :key="'k' + i" class="ozk-satir" :class="{ genis: s.genis }">
         <span class="ozk-ikon kucuk" aria-hidden="true"><svg viewBox="0 0 24 24" v-html="s.ikon"></svg></span>
         <div>
           <div class="ozk-etiket">{{ s.label }}</div>
-          <div class="ozk-metin">{{ s.sayi }}<template v-if="s.birim"> {{ s.birim }}</template></div>
+          <div class="ozk-metin">{{ s.birim ? s.sayi + ' ' + s.birim : s.sayi }}</div>
         </div>
       </div>
     </div>
@@ -73,10 +77,31 @@ function ayir(value, unit) {
   return { sayi: v, birim: '' };
 }
 
+// Veritabanında aynı birim farklı yazılmış ("KG", "Kg", "KM/H", "SA"); ekranda tek tip göster
+function birimDuzelt(b) {
+  const k = b.toLocaleLowerCase('tr').replace(/\s+/g, '');
+  if (/^kg$/.test(k)) return 'kg';
+  if (/^km\/(h|sa|s|saat)$/.test(k)) return 'km/sa';
+  if (/^km$/.test(k)) return 'km';
+  if (/^(sa|saat|h)$/.test(k)) return 'saat';
+  if (/^cm3$|^cm³$|^cc$/.test(k)) return 'cc';
+  if (/^nm$/.test(k)) return 'Nm';
+  if (/^(l|lt)\/100km$/.test(k)) return 'L/100 km';
+  if (/^lt?$/.test(k)) return 'L';
+  if (/^kw$/.test(k)) return 'kW';
+  if (/^w$/.test(k)) return 'W';
+  if (/^ps$/.test(k)) return 'PS';
+  return b;
+}
+
 const liste = computed(() =>
   props.specs.map((s) => {
     const k = KURALLAR.find(([re]) => re.test(s.label));
-    const { sayi, birim } = ayir(s.value, s.unit);
+    // Batarya kapasitesi ("48V 22 Ah") olduğu gibi kalır
+    const ham = /batarya kap/i.test(s.label);
+    const ay = ham ? { sayi: [s.value, s.unit].filter(Boolean).join(' '), birim: '' } : ayir(s.value, s.unit);
+    const sayi = ay.sayi.replace(/\s*-\s*/, '–');
+    const birim = birimDuzelt(ay.birim);
     return {
       label: s.label,
       sayi,
@@ -85,11 +110,18 @@ const liste = computed(() =>
       renk: k ? k[2] : '#64748b',
       onde: k ? k[3] && sayi.length <= 14 : false,
       sira: k ? KURALLAR.indexOf(k) : 99,
+      genis: (sayi + birim).length > 16,
     };
   })
 );
 
 const oneCikan = computed(() => liste.value.filter((s) => s.onde).sort((a, b) => a.sira - b.sira).slice(0, 4));
+// Elektrikli mi: şarj/batarya bilgisi var, yakıt/motor hacmi yok
+const elektrikli = computed(() => {
+  const e = props.specs.map((x) => String(x.label));
+  return e.some((l) => /şarj|batarya/i.test(l)) && !e.some((l) => /yakıt|motor hacmi/i.test(l));
+});
+
 const digerleri = computed(() => liste.value.filter((s) => !oneCikan.value.includes(s)));
 </script>
 
@@ -125,12 +157,24 @@ const digerleri = computed(() => liste.value.filter((s) => !oneCikan.value.inclu
 .ozk-satir .ozk-etiket { margin-top: 0; color: var(--muted); }
 .ozk-metin { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-top: 2px; }
 
+.ozk-rozet {
+  display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--yesil) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--yesil) 40%, var(--line));
+  font-size: 13.5px; color: var(--ink);
+}
+.ozk-rozet svg { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: var(--yesil); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ozk-rozet b { font-weight: 700; }
+
 @media (max-width: 720px) {
   .ozk-buyuk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ozk-kart:nth-child(3)::before { display: none; }
   .ozk-kart:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, 0.12); }
   .ozk-deger { font-size: 24px; }
-  .ozk-kucuk { grid-template-columns: 1fr; }
-  .ozk-satir:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid var(--line); }
+  .ozk-kucuk { column-gap: 14px; padding: 2px 12px; }
+  .ozk-satir { gap: 9px; padding: 10px 0; }
+  .ozk-satir.genis { grid-column: 1 / -1; }
+  .ozk-ikon.kucuk svg { width: 16px; height: 16px; }
+  .ozk-metin { font-size: 13.5px; }
+  .ozk-satir .ozk-etiket { font-size: 9.5px; letter-spacing: 0.06em; }
 }
 </style>
