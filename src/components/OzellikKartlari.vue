@@ -9,7 +9,7 @@
     </div>
     <div v-if="elektrikli" class="ozk-rozet">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v5M15 2v5"/><path d="M6 7h12v4a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></svg>
-      <span><b>Normal prizden şarj edilir</b></span>
+      <span><b>Normal prizden şarj edilir</b><template v-if="yuzKmTl"> · 100 km'de yaklaşık <b>{{ yuzKmTl }} TL</b> elektrik</template></span>
     </div>
     <div v-if="digerleri.length" class="ozk-kucuk">
       <div v-for="(s, i) in digerleri" :key="'k' + i" class="ozk-satir" :class="{ genis: s.genis }">
@@ -120,6 +120,26 @@ const oneCikan = computed(() => liste.value.filter((s) => s.onde).sort((a, b) =>
 const elektrikli = computed(() => {
   const e = props.specs.map((x) => String(x.label));
   return e.some((l) => /şarj|batarya/i.test(l)) && !e.some((l) => /yakıt|motor hacmi/i.test(l));
+});
+
+// 100 km elektrik maliyeti: EPDK 4.4.2026 mesken tek zamanlı alt kademe (günlük 8 kWh'e kadar),
+// vergiler dahil ~3,24 TL/kWh; şarj kaybı %10. Menzil aralıksa ortası alınır.
+const KWH_TL = 3.24;
+const yuzKmTl = computed(() => {
+  if (!elektrikli.value) return null;
+  const bul = (re) => props.specs.find((x) => re.test(String(x.label)));
+  const bat = bul(/batarya kap/i);
+  const men = bul(/menzil/i);
+  if (!bat || !men) return null;
+  const metin = (s) => `${s.value ?? ''} ${s.unit ?? ''}`.replace(/,/g, '.');
+  const v = metin(bat).match(/([\d.]+)\s*v/i);
+  const ah = metin(bat).match(/([\d.]+)\s*ah/i);
+  const km = (metin(men).match(/[\d.]+/g) || []).map(Number).filter((n) => n > 0);
+  if (!v || !ah || !km.length) return null;
+  const kwh = (Number(v[1]) * Number(ah[1])) / 1000;
+  const menzil = km.length > 1 ? (km[0] + km[1]) / 2 : km[0];
+  const tl = Math.round((kwh / menzil) * 100 * 1.1 * KWH_TL);
+  return Number.isFinite(tl) && tl > 0 ? Math.max(1, tl) : null;
 });
 
 const digerleri = computed(() => liste.value.filter((s) => !oneCikan.value.includes(s)));
