@@ -60,14 +60,7 @@
             <a v-if="phoneHref" :href="phoneHref" class="btn btn-ghost btn-lg" @click="trackEvent('clickDetailCallDealerCta')">Hemen ara</a>
           </div>
 
-          <div v-if="specsList.length" class="detail-specs">
-            <div class="spec-row">
-              <div v-for="(s, i) in specsList" :key="i" class="spec">
-                <div class="spec-label">{{ s.label }}</div>
-                <div class="spec-value">{{ s.value }} <span v-if="s.unit">{{ s.unit }}</span></div>
-              </div>
-            </div>
-          </div>
+          <OzellikKartlari v-if="specsList.length" :specs="specsList" />
 
           <div v-if="motor.colors && motor.colors.length > 1" class="detail-colors">
             <div class="detail-colors-label">Renk seçenekleri</div>
@@ -116,6 +109,7 @@
 </template>
 
 <script setup>
+import OzellikKartlari from '../components/OzellikKartlari.vue';
 import { taksitMetni, whatsappLink, urunWhatsappMetni, urunSSS } from '../lib/magaza';
 import { ref, computed, watch, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
