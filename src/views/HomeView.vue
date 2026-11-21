@@ -32,7 +32,7 @@
 
     <section v-else class="hero hero-sahne">
       <picture class="sahne-foto" aria-hidden="true">
-        <img src="/galeri/hero-magaza-yatay.jpg" alt="" fetchpriority="high" decoding="async" />
+        <img src="/galeri/hero-magaza-2111.jpg" alt="" fetchpriority="high" decoding="async" />
       </picture>
       <div class="sahne-perde" aria-hidden="true"></div>
       <div class="container sahne-ic">
