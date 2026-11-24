@@ -38,7 +38,7 @@
       </header>
 
       <nav class="sekmeler">
-        <button v-for="s in SEKMELER" :key="s.id" :class="{ aktif: sekme === s.id }" @click="sekme = s.id">{{ s.ad }}</button>
+        <button v-for="s in gorunenSekmeler" :key="s.id" :class="{ aktif: sekme === s.id }" @click="sekme = s.id">{{ s.ad }}</button>
       </nav>
 
       <p v-if="hata" class="hata icerik">{{ hata }}</p>
@@ -206,8 +206,80 @@
         <p v-if="!raporlar.length" class="soluk">Rapor yok.</p>
       </section>
 
+      <!-- Belgeler (yönetici): fatura PDF/XML ve diğer belgeler -->
+      <section v-if="sekme === 'belge' && !izleyici" class="icerik">
+        <h2 style="margin-top:0">Belge yükle</h2>
+        <form class="form-kutu" @submit.prevent="belgeYukle">
+          <label>Fatura / belge no<input v-model="yeniBelge.no" required placeholder="Ör. AKG2026000001607" /></label>
+          <label>Tür<select v-model="yeniBelge.tur"><option value="alis">Alış faturası</option><option value="satis">Satış faturası</option></select></label>
+          <label>Tarih<input v-model="yeniBelge.tarih" type="date" /></label>
+          <label>Dosya (PDF, XML, JPG, PNG)<input ref="belgeDosyaGirdi" type="file" accept=".pdf,.xml,.jpg,.jpeg,.png,application/pdf,application/xml,image/*" required @change="belgeSecildi" /></label>
+          <button type="submit" class="btn btn-primary" :disabled="kaydediliyor">{{ kaydediliyor ? 'Yükleniyor…' : 'Yükle' }}</button>
+          <p v-if="islemMesaji" class="kucuk">{{ islemMesaji }}</p>
+        </form>
+        <h2>Belgeler</h2>
+        <div class="filtre"><input v-model="belgeArama" placeholder="Fatura no ara" /><span class="soluk kucuk">{{ belgeFiltreli.length }} belge</span></div>
+        <div class="tablo-kap">
+          <table>
+            <thead><tr><th>Fatura no</th><th>Tür</th><th>Tarih</th><th></th></tr></thead>
+            <tbody>
+              <tr v-for="b in belgeFiltreli" :key="b.fatura_no">
+                <td class="mono">{{ b.fatura_no }}</td><td>{{ b.tur === 'satis' ? 'Satış' : 'Alış' }}</td><td>{{ tarih(b.tarih) }}</td>
+                <td class="sag"><button class="btn btn-kucuk" @click="belgeAc(b)">Aç</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Masraflar (yönetici) -->
+      <section v-if="sekme === 'masraf' && !izleyici" class="icerik">
+        <h2 style="margin-top:0">Masraf ekle</h2>
+        <form class="form-kutu" @submit.prevent="masrafEkle">
+          <label>Tarih<input v-model="yeniMasraf.tarih" type="date" required /></label>
+          <label>Kategori<select v-model="yeniMasraf.kategori"><option v-for="k in MASRAF_KATEGORILERI" :key="k">{{ k }}</option></select></label>
+          <label>Açıklama<input v-model="yeniMasraf.aciklama" placeholder="İsteğe bağlı" /></label>
+          <label>Tutar (₺, KDV hariç)<input v-model.number="yeniMasraf.tutar" type="number" min="0" step="0.01" required /></label>
+          <label>KDV (₺)<input v-model.number="yeniMasraf.kdv" type="number" min="0" step="0.01" /></label>
+          <label class="yatay"><input v-model="yeniMasraf.kasadan" type="checkbox" /> Mağaza kasasından ödendi</label>
+          <button type="submit" class="btn btn-primary" :disabled="kaydediliyor">{{ kaydediliyor ? 'Kaydediliyor…' : 'Kaydet' }}</button>
+          <p v-if="islemMesaji" class="kucuk">{{ islemMesaji }}</p>
+        </form>
+        <h2>Son masraflar</h2>
+        <div class="tablo-kap">
+          <table>
+            <thead><tr><th>Tarih</th><th>Kategori</th><th>Açıklama</th><th class="sag">Tutar</th><th>Kasadan</th><th>Giren</th></tr></thead>
+            <tbody>
+              <tr v-for="x in masrafDetay" :key="x.id">
+                <td>{{ tarih(x.tarih) }}</td><td>{{ x.kategori }}</td><td>{{ x.aciklama }}</td>
+                <td class="sag">{{ tl(Number(x.tutar) + Number(x.kdv || 0)) }}</td><td>{{ x.kasadan ? 'Evet' : '' }}</td><td class="soluk">{{ x.olusturan_adi }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Fiyatlar (yönetici): güncel satış fiyatı siteye de yansır -->
+      <section v-if="sekme === 'fiyat' && !izleyici" class="icerik">
+        <p class="soluk kucuk">Güncel satış fiyatı değişince internet sitesindeki fiyat da kendiliğinden güncellenir.</p>
+        <div class="filtre"><input v-model="fiyatArama" placeholder="Model ara" /></div>
+        <div class="tablo-kap">
+          <table>
+            <thead><tr><th>Model</th><th class="sag">Tavsiye</th><th class="sag">Güncel satış</th><th></th></tr></thead>
+            <tbody>
+              <tr v-for="f in fiyatFiltreli" :key="f.model">
+                <td>{{ f.model }}</td><td class="sag">{{ f.tavsiye ? tl(f.tavsiye) : '–' }}</td>
+                <td class="sag"><input v-model.number="fiyatTaslak[f.model]" type="number" min="0" step="1" class="fiyat-girdi" /></td>
+                <td class="sag"><button class="btn btn-kucuk" :disabled="kaydediliyor || Number(fiyatTaslak[f.model]) === Number(f.guncel) || !fiyatTaslak[f.model]" @click="fiyatKaydet(f)">Kaydet</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p v-if="islemMesaji" class="kucuk">{{ islemMesaji }}</p>
+      </section>
+
       <footer class="alt soluk kucuk">
-        Veriler canlıdır, son yükleme {{ sonYukleme }}. Bu panel yalnız görüntüleme içindir; kayıtlar iPhone uygulamasından girilir.
+        Veriler canlıdır, son yükleme {{ sonYukleme }}. <template v-if="izleyici">Bu hesap yalnız görüntüleme içindir.</template><template v-else>Belge, masraf ve fiyat buradan da girilebilir; diğer kayıtlar iPhone uygulamasından.</template>
         <template v-if="izleyici"> Müşteri bilgileri gizlidir.</template>
       </footer>
     </template>
@@ -226,6 +298,13 @@ const SEKMELER = [
   { id: 'siparis', ad: 'Volta siparişleri' },
   { id: 'rapor', ad: 'Asistan raporu' },
 ];
+const YONETICI_SEKMELERI = [
+  { id: 'belge', ad: 'Belgeler' },
+  { id: 'masraf', ad: 'Masraflar' },
+  { id: 'fiyat', ad: 'Fiyatlar' },
+];
+const MASRAF_KATEGORILERI = ['Kira', 'Maaş', 'Elektrik / Su / İnternet', 'Nakliye', 'Kargo', 'Yemek', 'Tadilat / Malzeme',
+  'Temizlik / Mutfak', 'Vergi / Muhasebe', 'Reklam', 'Diğer'];
 const AYLAR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 
 const sb = panelSupabase();
@@ -248,6 +327,100 @@ const sabitMasraflar = ref([]);
 const aksesuarSatis = ref([]);
 const parcalar = ref([]);
 const hakedis = ref(300);
+const belgeler = ref([]);
+const masrafDetay = ref([]);
+const belgeArama = ref('');
+const fiyatArama = ref('');
+const fiyatTaslak = ref({});
+const kaydediliyor = ref(false);
+const islemMesaji = ref('');
+const belgeDosyaGirdi = ref(null);
+const secilenDosya = ref(null);
+const bugunStr = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
+const yeniBelge = ref({ no: '', tur: 'alis', tarih: bugunStr() });
+const yeniMasraf = ref({ tarih: bugunStr(), kategori: 'Diğer', aciklama: '', tutar: null, kdv: 0, kasadan: false });
+const gorunenSekmeler = computed(() => (izleyici.value ? SEKMELER : [...SEKMELER, ...YONETICI_SEKMELERI]));
+const belgeFiltreli = computed(() => {
+  const q = belgeArama.value.trim().toLocaleLowerCase('tr');
+  return q ? belgeler.value.filter((b) => String(b.fatura_no).toLocaleLowerCase('tr').includes(q)) : belgeler.value;
+});
+const fiyatFiltreli = computed(() => {
+  const q = fiyatArama.value.trim().toLocaleLowerCase('tr');
+  return [...fiyatlar.value].filter((f) => !q || String(f.model).toLocaleLowerCase('tr').includes(q))
+    .sort((a, b) => String(a.model).localeCompare(String(b.model), 'tr'));
+});
+function belgeSecildi(e) { secilenDosya.value = e.target.files?.[0] || null; }
+async function yoneticiVerisi() {
+  if (izleyici.value) return;
+  const [b, md] = await Promise.all([
+    sb.from('belgeler').select('fatura_no, tur, dosya, tarih').order('tarih', { ascending: false, nullsFirst: false }).limit(2000),
+    sb.from('masraflar').select('id, tarih, kategori, aciklama, tutar, kdv, kasadan, olusturan_adi').order('tarih', { ascending: false }).limit(200),
+  ]);
+  belgeler.value = b.data || [];
+  masrafDetay.value = md.data || [];
+  const t = {};
+  fiyatlar.value.forEach((f) => { t[f.model] = f.guncel == null ? null : Number(f.guncel); });
+  fiyatTaslak.value = t;
+  if (b.error || md.error) hata.value = `Veri alınamadı: ${(b.error || md.error).message}`;
+}
+async function belgeYukle() {
+  islemMesaji.value = '';
+  const dosya = secilenDosya.value;
+  const no = yeniBelge.value.no.trim().toLocaleUpperCase('tr').replace(/İ/g, 'I').replace(/Ş/g, 'S').replace(/Ğ/g, 'G').replace(/Ü/g, 'U').replace(/Ö/g, 'O').replace(/Ç/g, 'C').replace(/[^A-Z0-9._-]/g, '-');
+  if (!dosya || !no) return;
+  const uzanti = (dosya.name.split('.').pop() || 'pdf').toLowerCase();
+  const yol = `${yeniBelge.value.tur}/${no}.${uzanti}`;
+  kaydediliyor.value = true;
+  const tip = uzanti === 'xml' ? 'application/xml' : uzanti === 'pdf' ? 'application/pdf' : (dosya.type || 'application/octet-stream');
+  const { error: e1 } = await sb.storage.from('belgeler').upload(yol, dosya, { upsert: true, contentType: tip });
+  let e2 = null;
+  if (!e1) {
+    const kayit = { fatura_no: no, tur: yeniBelge.value.tur, dosya: yol };
+    if (yeniBelge.value.tarih) kayit.tarih = yeniBelge.value.tarih;
+    ({ error: e2 } = await sb.from('belgeler').upsert([kayit], { onConflict: 'fatura_no' }));
+  }
+  kaydediliyor.value = false;
+  if (e1 || e2) { islemMesaji.value = `Yüklenemedi: ${(e1 || e2).message}`; return; }
+  islemMesaji.value = `${no} yüklendi.`;
+  yeniBelge.value = { no: '', tur: yeniBelge.value.tur, tarih: bugunStr() };
+  secilenDosya.value = null;
+  if (belgeDosyaGirdi.value) belgeDosyaGirdi.value.value = '';
+  await yoneticiVerisi();
+}
+async function belgeAc(b) {
+  const pencere = window.open('', '_blank');
+  const { data, error } = await sb.storage.from('belgeler').createSignedUrl(b.dosya, 600);
+  if (error || !data?.signedUrl) { if (pencere) pencere.close(); islemMesaji.value = `Açılamadı: ${error?.message || ''}`; return; }
+  if (pencere) pencere.location.href = data.signedUrl; else window.location.href = data.signedUrl;
+}
+async function masrafEkle() {
+  islemMesaji.value = '';
+  const m = yeniMasraf.value;
+  if (!(Number(m.tutar) > 0)) { islemMesaji.value = 'Tutar girin.'; return; }
+  kaydediliyor.value = true;
+  const { error } = await sb.from('masraflar').insert([{
+    tarih: m.tarih, kategori: m.kategori, aciklama: m.aciklama.trim(), tutar: Number(m.tutar), kdv: Number(m.kdv) || 0, kasadan: !!m.kasadan,
+  }]);
+  kaydediliyor.value = false;
+  if (error) { islemMesaji.value = `Kaydedilemedi: ${error.message}`; return; }
+  islemMesaji.value = 'Masraf kaydedildi.';
+  yeniMasraf.value = { tarih: bugunStr(), kategori: m.kategori, aciklama: '', tutar: null, kdv: 0, kasadan: false };
+  await yukle();
+}
+async function fiyatKaydet(f) {
+  islemMesaji.value = '';
+  const yeni = Number(fiyatTaslak.value[f.model]);
+  if (!(yeni > 0)) return;
+  kaydediliyor.value = true;
+  const { error } = await sb.from('model_fiyatlari').update({ guncel: yeni }).eq('model', f.model);
+  kaydediliyor.value = false;
+  if (error) { islemMesaji.value = `Kaydedilemedi: ${error.message}`; return; }
+  islemMesaji.value = `${f.model} güncel fiyatı ${tl(yeni)} oldu (site de güncellendi).`;
+  await yukle();
+}
 const karAy = ref('');
 
 const arama = ref('');
@@ -467,6 +640,7 @@ async function yukle() {
   raporlar.value = r.data || [];
   if (!satisAy.value || !satisAylari.value.includes(satisAy.value)) satisAy.value = satisAylari.value[0] || buAy;
   if (!karAy.value) karAy.value = buAy;
+  await yoneticiVerisi();
   sonYukleme.value = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
   bekliyor.value = false;
 }
@@ -495,6 +669,7 @@ async function girisYap() {
 async function cikis() {
   await sb.auth.signOut();
   motorlar.value = []; fiyatlar.value = []; siparisler.value = []; raporlar.value = [];
+  belgeler.value = []; masrafDetay.value = [];
   masraflar.value = []; sabitMasraflar.value = []; aksesuarSatis.value = []; parcalar.value = [];
   hata.value = '';
   durum.value = 'giris';
@@ -522,6 +697,11 @@ input[type='checkbox'] { padding: 0; }
 
 .btn { font: inherit; cursor: pointer; padding: 8px 14px; border-radius: var(--radius-sm); border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); }
 .btn-primary { background: var(--primary); border-color: var(--primary); color: #0a0a0a; font-weight: 600; padding: 11px; }
+.form-kutu { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; align-items: end; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.form-kutu label { display: grid; gap: 4px; font-size: 13px; }
+.form-kutu label.yatay { display: flex; align-items: center; gap: 8px; }
+.form-kutu input, .form-kutu select, .fiyat-girdi { font: inherit; padding: 8px 10px; border: 1px solid var(--line-2); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); }
+.fiyat-girdi { width: 130px; text-align: right; }
 .btn-kucuk { padding: 6px 10px; font-size: 13px; }
 .btn:disabled { opacity: 0.6; cursor: default; }
 
